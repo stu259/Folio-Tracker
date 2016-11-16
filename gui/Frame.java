@@ -1,9 +1,8 @@
 package gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
+
+import controller.newTab;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame{
@@ -20,14 +19,7 @@ public class Frame extends JFrame{
 		
 		menu = new Menu("Folio");   
 		menubar = menu.getMenuBar();
-		menubar.getMenu(0).getItem(0).addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addTab("Tab");
-			}
-			
-		});
+		menubar.getMenu(0).getItem(0).addActionListener(new newTab(this));
 		
 		pane = new TabbedPane("Home");
 		
