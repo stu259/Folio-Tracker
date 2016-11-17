@@ -11,29 +11,19 @@ public class TabbedPane extends JTabbedPane{
 	
 	public void addTabb(String name){
 		
-		JPanel header;
 		JPanel mainContainer;
-		JPanel footer;
 		JPanel con;
 		
+		FooterPanel footer = new FooterPanel();
+		HeaderPanel header = new HeaderPanel();
 		
 		con = new JPanel();
 		con.setLayout(new BoxLayout(con,BoxLayout.PAGE_AXIS));
 		
-		header = new JPanel();
-		JLabel infoh = new JLabel("Header container");
-		
 		mainContainer = new JPanel();
 		Table table = new Table("Stocks");
 		
-		
-		footer = new JPanel();
-		JLabel infof = new JLabel("Footer container");
-		
-		header.add(infoh);
 		mainContainer.add(table);
-		footer.add(infof);
-		
 		
 		con.add(header);
 		con.add(mainContainer);
