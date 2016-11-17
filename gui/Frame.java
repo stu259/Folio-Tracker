@@ -1,40 +1,45 @@
 package gui;
-
+import controller.*;
+import java.awt.*;
 import javax.swing.*;
 
-import controller.newTab;
+
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame{
 
 	Menu menu;
-	JMenuBar menubar;
 	TabbedPane pane;
-	
 	
 	public Frame(String name){
 		super(name);
 		
-		this.setSize(800, 600);
-		
 		menu = new Menu("Folio");   
-		menubar = menu.getMenuBar();
-		menubar.getMenu(0).getItem(0).addActionListener(new newTab(this));
-		
-		pane = new TabbedPane("Home");
-		
-		this.setJMenuBar(menubar);
+		pane = new TabbedPane("FolioTracker TabbedPane");
 		
 		this.add(pane);
-		
+		this.setSize(900, 700);
+		this.setResizable(false);
+		this.setJMenuBar(menu.getMenuBar());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		this.setVisible(true);
+		
+		addListeners();
 	}
 	
-	public void addSomething(String name, String description){
-		//this.add(comp);
+	
+	private void addListeners(){
+		JMenu folio = menu.getMenuBar().getMenu(0);
+		JMenuItem add = folio.getItem(0);
+		//Add all other menuitems of folio here
+		
+		//Add other menus here
+		//Add other menus' menuitems here
+		
+		add.addActionListener(new newTab(this));
+		//Add other actionlisteners or whatever listeners here.
 	}
+	
 	
 	public void addMenu(String name,String desc, JMenuItem[] items){
 		JMenu m = new JMenu(name);
@@ -45,7 +50,11 @@ public class Frame extends JFrame{
 			}
 		}
 		
-		menubar.add(m);
+		menu.getMenuBar().add(m);
+	}
+	
+	public Component getTabAt(int index){
+		return pane.getComponentAt(index);
 	}
 	
 	public void addTab(String name){

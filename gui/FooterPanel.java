@@ -1,10 +1,9 @@
 package gui;
 
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class FooterPanel extends JPanel{
 
 		JButton footer_close;

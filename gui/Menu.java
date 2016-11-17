@@ -19,13 +19,7 @@ public class Menu extends JMenuBar{
 	
 		
 		menu.addSeparator();
-		
-		
-		menuItem = new JMenuItem("Some text only menu item");
-		menu.add(menuItem);
-		
-		menuItem = new JMenuItem("Some text only menu item");
-		menu.add(menuItem);
+
 		
 		submenu = new JMenu("A submenu");
 		
