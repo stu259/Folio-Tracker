@@ -14,16 +14,23 @@ public class Menu extends JMenuBar{
 		menu = new JMenu(menuName);
 		menubar.add(menu);
 		
-		menuItem = new JMenuItem("New");
+		menuItem = new JMenuItem("Create");
 		menu.add(menuItem);
-	
+		
+		//adding this to cover gui specs for submission1.
+		//can edit / refactor afterwards
+		JMenuItem x = new JMenuItem("Open");
+		JMenuItem y = new JMenuItem("Save");
+		menu.add(x);
+		menu.add(y);
+		////////////////
 		
 		menu.addSeparator();
 
 		
-		submenu = new JMenu("A submenu");
+		submenu = new JMenu("More");
 		
-		menuItem = new JMenuItem("Some text only sub-menu item");
+		menuItem = new JMenuItem("Coming soon!");
 		submenu.add(menuItem);
 		
 		menu.add(submenu);
