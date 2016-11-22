@@ -1,12 +1,11 @@
 package gui;
 import controller.*;
-import java.awt.*;
 import javax.swing.*;
 
 
 
 @SuppressWarnings("serial")
-public class Frame extends JFrame{
+public class Frame extends JFrame implements IFrame{
 
 	Menu menu;
 	TabbedPane pane;
@@ -15,7 +14,7 @@ public class Frame extends JFrame{
 		super(name);
 		
 		menu = new Menu("Folio");   
-		pane = new TabbedPane("FolioTracker TabbedPane");
+		pane = new TabbedPane("FolioTracker TabbedPane", this);
 		
 		this.add(pane);
 		this.setSize(900, 700);
@@ -28,19 +27,44 @@ public class Frame extends JFrame{
 	}
 	
 	
-	private void addListeners(){
+	public void addListeners(){
+		/* MENU EVENT HANDLERS */
+		/* Folio Menu
+		 * Create (0)
+		 * Open (1)
+		 * Save (2)
+		 * SEPARATOR (3)
+		 * More (4) -> Commig Soon (0)
+		 * Exit (5)
+		*/
 		JMenu folio = menu.getMenuBar().getMenu(0);
-		JMenuItem add = folio.getItem(0);
-		//Add all other menuitems of folio here
+		JMenuItem create = folio.getItem(0); 
+		//JMenuItem open = folio.getItem(1);
+		//JMenuItem save= folio.getItem(2);
+		//JMenuItem comingSoon = ((JMenu) folio.getItem(4)).getItem(0); 
+		JMenuItem exit = folio.getItem(5);
+		
 		
 		//Add other menus here
 		//Add other menus' menuitems here
 		
-		add.addActionListener(new newTab(this));
-		//Add other actionlisteners or whatever listeners here.
+		create.addActionListener(new newTab(this));
+		exit.addActionListener(new ExitFrame(this));
+		
+		/* HEADER ACTION HANDLERS */
+		
+		/* FOOTER ACTION HANDLERS */
+		
+		
 	}
 	
+	@Override
+	public void closeTab(){
+		/* Consider writing to file before closing the panel */
+		pane.remove(getCurrentTab());
+	}
 	
+	/* Not really sure if this is still needed */
 	public void addMenu(String name,String desc, JMenuItem[] items){
 		JMenu m = new JMenu(name);
 		m.getAccessibleContext().setAccessibleDescription(desc);
@@ -53,11 +77,48 @@ public class Frame extends JFrame{
 		menu.getMenuBar().add(m);
 	}
 	
-	public Component getTabAt(int index){
-		return pane.getComponentAt(index);
-	}
-	
+	@Override
 	public void addTab(String name){
 		pane.addTabb(name);
 	}
+	
+	@Override
+	public TabContainer getCurrentTab(){
+		return (TabContainer) pane.getSelectedComponent();
+	}
+	
+	
+	public TabbedPane getPane(){
+		return pane;
+	}
+
+	@Override
+	public ITable getITable(){
+		return getCurrentTab().getMain().getTable();
+	}
+
+	
+	/* Some methods that holds the information that the user inputed so we can use it */
+	
+	@Override
+	public String getTickerSymbol() {
+		return getCurrentTab().getHeader().getTickerSymbol();
+	}
+
+
+	@Override
+	public int getNShares() {
+		
+		return (getCurrentTab().getHeader().getNumShares() == "") ? 0 : Integer.parseInt(getCurrentTab().getHeader().getNumShares());
+	}
+
+
+	@Override
+	public void exit() {
+		/*Add code for saving or other functions to be executed before actually exiting the program*/
+		System.exit(0);
+	}
+
+	
+	
 }

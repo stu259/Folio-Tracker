@@ -13,23 +13,32 @@ public class newTab implements ActionListener{
 	//Shouldnt be done directly as reference but with some interface of the frame!
 	//Otherwise correct decoupling :) YAS
 	
-	Frame frame;
+	IFrame frame;
 	
-	public newTab(Frame f)
+	public newTab(IFrame f)
 	{
 		frame = f;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String tabname = JOptionPane.showInputDialog(frame, "Please name your tab");
+		String tabname = JOptionPane.showInputDialog("Please name your tab");
 		
-		if((tabname == null))
-			return;
-		else if(tabname.equals("") || tabname.equals(" "))
-			JOptionPane.showMessageDialog(frame, "You Entered nothing, Please retry");
-		else
-			frame.addTab(tabname);
+		boolean invalidName = true;
+		
+		while(invalidName){
+			if(tabname != null)
+				tabname = tabname.trim();
+			else
+				return;
+			if(!((tabname == null) || tabname.equals(""))){
+				frame.addTab(tabname);
+				invalidName = false;
+				break;
+			}
+			tabname = JOptionPane.showInputDialog("You Entered nothing, Please retry");
+		}
+		
 	}
 
 }

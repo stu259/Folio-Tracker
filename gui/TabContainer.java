@@ -7,15 +7,16 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class TabContainer extends JPanel{
 	
-	FooterPanel footer;
-	MainPanel main;
-	HeaderPanel header;
+	private FooterPanel footer;
+	private MainPanel main;
+	private HeaderPanel header;
 
-	public TabContainer(){
-		header = new HeaderPanel();
-		main = new MainPanel();
-		footer = new FooterPanel();
-
+	public TabContainer(String name, IFrame f){
+		this.setName(name);
+		
+		header = new HeaderPanel(f);
+		main = new MainPanel(f);
+		footer = new FooterPanel(f);
 		
 		header.setPreferredSize(new Dimension(900, 50));
 		main.setPreferredSize(new Dimension(900, 480));
@@ -28,5 +29,14 @@ public class TabContainer extends JPanel{
 		this.add(footer, BorderLayout.PAGE_END );
 	}
 	
-	//Maybe add getters and setters
+	public HeaderPanel getHeader(){
+		return header;
+	}
+	public MainPanel getMain(){
+		return main;
+	}
+	public FooterPanel getFooter(){
+		return footer;
+	}
+	
 }

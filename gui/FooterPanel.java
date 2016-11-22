@@ -3,36 +3,39 @@ package gui;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
+import controller.CloseTab;
+
 @SuppressWarnings("serial")
 public class FooterPanel extends JPanel{
 
-		JButton footer_close;
-		JButton footer_delete;
-		JLabel footer_label;
+	private JButton footer_close;
+	private JButton footer_delete;
 		
-		public FooterPanel(){
+	public FooterPanel(IFrame f){
+		JPanel labelPanel = new JPanel();
+		JPanel buttonPanel = new JPanel();
 		
-			JPanel labelPanel = new JPanel();
-			JPanel buttonPanel = new JPanel();
-			footer_close = new JButton("Close");
-			footer_delete = new JButton("Delete");
-			footer_label = new JLabel("Footer Panel");
-			labelPanel.add(footer_label);
-			buttonPanel.add(footer_close);
-			buttonPanel.add(footer_delete);
-			
-			this.setLayout(new BorderLayout());
-			this.add(labelPanel, BorderLayout.CENTER);
-			this.add(buttonPanel, BorderLayout.SOUTH);
-		}
+		footer_close = new JButton("Close");
+		footer_delete = new JButton("Delete");
 		
-		public void changeCloseButtonName(String name){
-			footer_close.setName(name);
-		}
+		footer_close.addActionListener(new CloseTab(f));
+		//footer_delete.addActionListener(new DeleteTab(f));
 		
-		public void changeDeleteButtonName(String name){
-			footer_delete.setName(name);
-		}
+		buttonPanel.add(footer_close);
+		buttonPanel.add(footer_delete);
 		
+		this.setLayout(new BorderLayout());
+		this.add(labelPanel, BorderLayout.CENTER);
+		this.add(buttonPanel, BorderLayout.SOUTH);
+	}
+	
+	public void changeCloseButtonName(String name){
+		footer_close.setName(name);
+	}
+	
+	public void changeDeleteButtonName(String name){
+		footer_delete.setName(name);
+	}
+	
 		
 }
