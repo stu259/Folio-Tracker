@@ -8,10 +8,11 @@ public class InfoGetter {
 	String ticker;
 	double value = 0.0;
 	int noOfShares;
+	double valOfHolding;
 	
 	public InfoGetter(){
 		q = new Quote(false);
-		ticker = "lloy.l"; //will be the value from user input in the gui
+		ticker = "0HIT.l"; //will be the value from user input in the gui
 		noOfShares = 0; //will be the value from user input in the gui
 	}
 	
@@ -25,9 +26,10 @@ public class InfoGetter {
 		}
 	}
 	
-	public Double getLatestValue() throws MethodException{
+	public double getLatestValue() throws MethodException{
 		value = q.getLatest();
 		return value;
 	}
+
 
 }
