@@ -4,6 +4,8 @@ import gui.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 public class newTab implements ActionListener{
 	
 	// For double-click for editing use different listener instead of ActionListener
@@ -20,7 +22,14 @@ public class newTab implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		frame.addTab("Tab");
+		String tabname = JOptionPane.showInputDialog(frame, "Please name your tab");
+		
+		if((tabname == null))
+			return;
+		else if(tabname.equals("") || tabname.equals(" "))
+			JOptionPane.showMessageDialog(frame, "You Entered nothing, Please retry");
+		else
+			frame.addTab(tabname);
 	}
 
 }
