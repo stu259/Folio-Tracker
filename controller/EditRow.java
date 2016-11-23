@@ -7,7 +7,6 @@ import javax.swing.*;
 
 import gui.IFrame;
 import gui.ITable;
-import gui.TabContainer;
 
 public class EditRow implements MouseListener{
 	
@@ -32,12 +31,7 @@ public class EditRow implements MouseListener{
 				
 				
 				
-				/* Do the magic of updating the table
-				 	
-				 */
-				
-				//Updates the total as we just edited our rows
-				((TabContainer) frame.getCurrentTab()).getMain().updateTotal(frame.getCurrentTab().getName());
+				frame.updateTotalLabel();
 			  }
 		}
 		

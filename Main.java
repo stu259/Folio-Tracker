@@ -1,25 +1,27 @@
-import API.*;
-import gui.*;
+//import API.IFolio;
+//import API.Folio;
+import gui.IFrame;
+import gui.Frame;
 
 public class Main {
 
 	public static void main(String[] args){
 		
 		
-		IBackEnd backend = new BackEnd();
+		//IFolio folio = new Folio();
+		// UNCOMMENT EVERYWHERE IN THE CODE WHERE THIS IS PASSED :)
 		
 		@SuppressWarnings("unused")
-		IFrame f = new Frame("Folio Tracker", backend);
+		IFrame f = new Frame("Folio Tracker"/*, folio*/);
 		
 		
 		/*
 		 TO DO :
 		 Probably have to look at the observer model (but might not need if we implement this right)
-		 Fix table double click (remove double click on cell to be actually double click on rows that goes to editRow)
+		
 		 Implement Save
 		 Implement Open
-		 Fix AddTableRow
-		 Implement TEMP (dont know what this is) button in the Header container
+		 
 		 Implement Delete button in the Footer container
 		 Connect the GUI with the API
 		 Add observer Model

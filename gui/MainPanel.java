@@ -3,15 +3,18 @@ import java.awt.*;
 
 import javax.swing.*;
 
+//import API.IFolio;
+
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel{
 	
 	private Table table;
 	private JLabel folioTotal;
 	
-	public MainPanel(IFrame f){
+	public MainPanel(IFrame f/*, IFolio fol*/){
+		
 		folioTotal = new JLabel("Empty Label");
-		table = new Table("Stocks",f);
+		table = new Table("Stocks",f/*,fol*/);
 		
 		folioTotal.setForeground(Color.blue);
 		

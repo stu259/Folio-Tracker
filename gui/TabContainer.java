@@ -3,6 +3,8 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 
+//import API.IFolio;
+
 
 @SuppressWarnings("serial")
 public class TabContainer extends JPanel{
@@ -11,11 +13,11 @@ public class TabContainer extends JPanel{
 	private MainPanel main;
 	private HeaderPanel header;
 
-	public TabContainer(String name, IFrame f){
+	public TabContainer(String name, IFrame f/*, IFolio fol*/){
 		this.setName(name);
 		
 		header = new HeaderPanel(f);
-		main = new MainPanel(f);
+		main = new MainPanel(f/*,fol*/);
 		footer = new FooterPanel(f);
 		
 		header.setPreferredSize(new Dimension(900, 50));
