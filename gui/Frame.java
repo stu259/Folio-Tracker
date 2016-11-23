@@ -2,7 +2,8 @@ package gui;
 
 import controller.*;
 import javax.swing.*;
-//import API.IFolio;
+
+import api.IModel;
 
 
 
@@ -11,15 +12,15 @@ public class Frame extends JFrame implements IFrame{
 
 	Menu menu;
 	TabbedPane pane;
-	//IFolio folio;
+	IModel model;
 	
-	public Frame(String name/*, IFolio fol*/){
+	public Frame(String name, IModel m){
 		this.setName(name);
 		
-		//folio = fol;
+		model = m;
 		
 		menu = new Menu("Folio");   
-		pane = new TabbedPane("FolioTracker TabbedPane", this/*,folio*/);
+		pane = new TabbedPane("FolioTracker TabbedPane", this, model);
 		
 		this.add(pane);
 		this.setSize(900, 700);

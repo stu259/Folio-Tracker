@@ -3,7 +3,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-//import API.IFolio;
+import api.IModel;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel{
@@ -11,10 +11,10 @@ public class MainPanel extends JPanel{
 	private Table table;
 	private JLabel folioTotal;
 	
-	public MainPanel(IFrame f/*, IFolio fol*/){
+	public MainPanel(IFrame f, IModel m){
 		
 		folioTotal = new JLabel("Empty Label");
-		table = new Table("Stocks",f/*,fol*/);
+		table = new Table("Stocks",f,m);
 		
 		folioTotal.setForeground(Color.blue);
 		

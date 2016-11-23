@@ -1,6 +1,6 @@
-//import API.IFolio;
-//import API.Folio;
 import gui.IFrame;
+import api.Model;
+import api.IModel;
 import gui.Frame;
 
 public class Main {
@@ -8,11 +8,11 @@ public class Main {
 	public static void main(String[] args){
 		
 		
-		//IFolio folio = new Folio();
+		IModel model = new Model();
 		// UNCOMMENT EVERYWHERE IN THE CODE WHERE THIS IS PASSED :)
 		
 		@SuppressWarnings("unused")
-		IFrame f = new Frame("Folio Tracker"/*, folio*/);
+		IFrame f = new Frame("Folio Tracker", model);
 		
 		
 		/*

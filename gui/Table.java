@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-//import API.IFolio;
+import api.IModel;
 import controller.EditRow;
 
 @SuppressWarnings("serial")
@@ -23,14 +23,15 @@ public class Table extends JPanel implements ITable{
 	private DefaultTableModel tModel;
 	
 	private IFrame frame;
-	//private IFolio folio;
+	private IModel model;
 	
 	private JTable table;
-	/* Consider passing an interface of the API so that we can use it to add rows and later when updating them to refresh */
-	public Table(String name, IFrame f/*, IFolio folio*/){
+
+	
+	public Table(String name, IFrame f, IModel m){
 		this.setName(name);
 		frame = f;
-		//folio = fol;
+		model = m;
 		
 		
 		table = new JTable();
@@ -108,7 +109,7 @@ public class Table extends JPanel implements ITable{
 
 	@Override
 	public void updateRow(int amount, String tSymbol) {
-		// folio . update shares info
+		// model . update shares info
 		// update table information from calling the back end
 	}
 	
