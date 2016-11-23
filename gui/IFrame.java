@@ -24,4 +24,7 @@ public interface IFrame {
 	/* Close the frame and exit the program*/
 	void exit();
 	
+	/* Update the label information for the current tab */
+	void updateTotalLabel();
+	
 }

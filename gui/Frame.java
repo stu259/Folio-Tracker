@@ -1,6 +1,8 @@
 package gui;
+
 import controller.*;
 import javax.swing.*;
+import API.IBackEnd;
 
 
 
@@ -9,9 +11,12 @@ public class Frame extends JFrame implements IFrame{
 
 	Menu menu;
 	TabbedPane pane;
+	IBackEnd backend;
 	
-	public Frame(String name){
+	public Frame(String name, IBackEnd b){
 		super(name);
+		
+		backend = b;
 		
 		menu = new Menu("Folio");   
 		pane = new TabbedPane("FolioTracker TabbedPane", this);
@@ -48,14 +53,14 @@ public class Frame extends JFrame implements IFrame{
 		//Add other menus here
 		//Add other menus' menuitems here
 		
-		create.addActionListener(new newTab(this));
-		exit.addActionListener(new ExitFrame(this));
+		create.addActionListener(new NewTab(this));
+		exit.addActionListener(new ExitFrame(this));	
 		
-		/* HEADER ACTION HANDLERS */
-		
-		/* FOOTER ACTION HANDLERS */
-		
-		
+	}
+	
+	@Override
+	public void updateTotalLabel(){
+		((TabContainer) getCurrentTab()).getMain().updateTotal(getCurrentTab().getName());
 	}
 	
 	@Override

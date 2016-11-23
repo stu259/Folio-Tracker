@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-public class newTab implements ActionListener{
+public class NewTab implements ActionListener{
 	
 	// For double-click for editing use different listener instead of ActionListener
 	
@@ -15,7 +15,7 @@ public class newTab implements ActionListener{
 	
 	IFrame frame;
 	
-	public newTab(IFrame f)
+	public NewTab(IFrame f)
 	{
 		frame = f;
 	}

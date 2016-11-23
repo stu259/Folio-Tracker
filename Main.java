@@ -5,11 +5,13 @@ public class Main {
 
 	public static void main(String[] args){
 		
-		@SuppressWarnings("unused")
-		IFrame f = new Frame("Folio Tracker");
+		
+		IBackEnd backend = new BackEnd();
 		
 		@SuppressWarnings("unused")
-		IQuote quote = new Quote(true);
+		IFrame f = new Frame("Folio Tracker", backend);
+		
+		
 		/*
 		 TO DO :
 		 Probably have to look at the observer model (but might not need if we implement this right)
@@ -20,6 +22,8 @@ public class Main {
 		 Implement TEMP (dont know what this is) button in the Header container
 		 Implement Delete button in the Footer container
 		 Connect the GUI with the API
+		 Add observer Model
+		 Add refresh
 		 */
 	}
 }

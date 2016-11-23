@@ -36,6 +36,10 @@ public class HeaderPanel extends JPanel{
 		this.add(header_temp);
 	}
 	
+	public JButton getAdd(){
+		return header_add;
+	}
+	
 	public String getTickerSymbol(){
 		return (header_tickerSymbol.getText() == null)? "" : header_tickerSymbol.getText();
 	}

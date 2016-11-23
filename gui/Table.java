@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import controller.EditRow;
 
@@ -16,31 +17,35 @@ public class Table extends JPanel implements ITable{
 			"Value of Holding"
 	};
 	
-	private Object[][] data = {
-			{"Ticker Symbol",
-				"Stock Name",
-				100,
-				1.0,
-				100.0},
-			{"Ticker Symbol",
-					"Stock Name",
-					200,
-					2.0,
-					200.0}
-	};
+	private Object[][] data;
+	
+	private DefaultTableModel tModel;
+	
+	IFrame frame;
 	
 	private JTable table;
 	/* Consider passing an interface of the API so that we can use it to add rows and later when updating them to refresh */
 	public Table(String name, IFrame f){
 		this.setName(name);
-		
+		frame = f;
 		/* Set limit to 10 shares for testing purpose. Would be better if we can avoid this*/
 		//data = new Object[10][5];
 		
-		table = new JTable(data,columnames);
+		table = new JTable();
 		table.setFillsViewportHeight(true);
 		table.setPreferredSize(new Dimension(870, 430));
 		table.addMouseListener(new EditRow(f/*Probably need information from the back-end here*/));
+		
+		
+		tModel = new DefaultTableModel(data, columnames) {
+
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		       return false;
+		    }
+		};
+		
+		table.setModel(tModel);
 		
 		JScrollPane p = new JScrollPane(table);
 		p.setPreferredSize(new Dimension(870,430));
@@ -59,20 +64,34 @@ public class Table extends JPanel implements ITable{
 	
 	@Override
 	public Object[] getRow(int index){
-		return data[index];
+		Object[] row = new Object[5];
+		row[0] = tModel.getValueAt(index, 0);
+		row[1] = tModel.getValueAt(index, 1);
+		row[2] = tModel.getValueAt(index, 2);
+		row[3] = tModel.getValueAt(index, 3);
+		row[4] = tModel.getValueAt(index, 4);
+		
+		return row;
 	}
 	
 	@Override
 	public void addRow(String symbol, int nShares){
+		Object[] row = new Object[5];
+		
+		row[0] = symbol;
+		row[1] = "Stock Name";
+		row[2] = nShares;
+		row[3] = 1.0;
+		row[4] = 100.0;
+		
+		tModel.addRow(row);
+		
+		frame.updateTotalLabel();
+		
 		//int current number of rows = something
 		/* sName = insert api interface here.GETSHRE NAME SOMEHOW */
 		/* price = insert api interface here.GETPRICE  SOMEHOW */
 		/* value = insert api interface here.GETVALUE SOMEHOW */
-		//data[current number of rows + 1][0] = symbol;
-		//data[current number of rows + 1][1] = sName;
-		//data[current number of rows + 1][2] = nShares;
-		//data[current number of rows + 1][3] = price;
-		//data[current number of rows + 1][4] = value;
 	}
 	
 	//Add getters and setters for the data object as this will be
