@@ -2,12 +2,13 @@ package gui;
 import javax.swing.*;
 
 import controller.AddTableRow;
+import controller.SellShares;
 
 @SuppressWarnings("serial")
 public class HeaderPanel extends JPanel{
 
-	private JButton header_add;
-	private JButton header_temp;
+	private JButton header_buy;
+	private JButton header_sell;
 	
 	private JLabel header_tickerlabel;
 	private JLabel header_numlabel;
@@ -17,10 +18,11 @@ public class HeaderPanel extends JPanel{
 	
 	public HeaderPanel(IFrame f){
 		
-		header_add = new JButton("Add");
-		header_temp = new JButton("Temp");
+		header_buy = new JButton("Buy");
+		header_sell = new JButton("Sell");
 		
-		header_add.addActionListener(new AddTableRow(f));
+		header_buy.addActionListener(new AddTableRow(f));
+		header_sell.addActionListener(new SellShares(f));
 		
 		header_tickerlabel = new JLabel("Ticker Symbol:");
 		header_numlabel = new JLabel("Number of Shares");
@@ -32,12 +34,12 @@ public class HeaderPanel extends JPanel{
 		this.add(header_tickerSymbol);
 		this.add(header_numlabel);
 		this.add(header_numShares);
-		this.add(header_add);
-		this.add(header_temp);
+		this.add(header_buy);
+		this.add(header_sell);
 	}
 	
-	public JButton getAdd(){
-		return header_add;
+	public JButton getBuyButton(){
+		return header_buy;
 	}
 	
 	public String getTickerSymbol(){

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+//import API.IFolio;
 import controller.EditRow;
 
 @SuppressWarnings("serial")
@@ -21,15 +22,16 @@ public class Table extends JPanel implements ITable{
 	
 	private DefaultTableModel tModel;
 	
-	IFrame frame;
+	private IFrame frame;
+	//private IFolio folio;
 	
 	private JTable table;
 	/* Consider passing an interface of the API so that we can use it to add rows and later when updating them to refresh */
-	public Table(String name, IFrame f){
+	public Table(String name, IFrame f/*, IFolio folio*/){
 		this.setName(name);
 		frame = f;
-		/* Set limit to 10 shares for testing purpose. Would be better if we can avoid this*/
-		//data = new Object[10][5];
+		//folio = fol;
+		
 		
 		table = new JTable();
 		table.setFillsViewportHeight(true);
@@ -93,7 +95,21 @@ public class Table extends JPanel implements ITable{
 		/* price = insert api interface here.GETPRICE  SOMEHOW */
 		/* value = insert api interface here.GETVALUE SOMEHOW */
 	}
+
+	@Override
+	public Object[] getRow(String tSymbol) {
+		for(int i = 0; i < tModel.getRowCount(); ++i){
+			if(tSymbol.equals(((String) getRow(i)[0]))){
+				return getRow(i);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void updateRow(int amount, String tSymbol) {
+		// folio . update shares info
+		// update table information from calling the back end
+	}
 	
-	//Add getters and setters for the data object as this will be
-	//one of the main things that the controller will have to do
 }
