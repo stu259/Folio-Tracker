@@ -1,7 +1,8 @@
 package gui;
 import javax.swing.*;
 
-import controller.AddTableRow;
+import api.Model;
+import controller.BuyShares;
 import controller.SellShares;
 
 @SuppressWarnings("serial")
@@ -16,13 +17,13 @@ public class HeaderPanel extends JPanel{
 	private JTextField header_tickerSymbol;
 	private JTextField header_numShares;
 	
-	public HeaderPanel(IFrame f){
+	public HeaderPanel(Frame f, Model m){
 		
 		header_buy = new JButton("Buy");
 		header_sell = new JButton("Sell");
 		
-		header_buy.addActionListener(new AddTableRow(f));
-		header_sell.addActionListener(new SellShares(f));
+		header_buy.addActionListener(new BuyShares(f,m));
+		header_sell.addActionListener(new SellShares(f,m));
 		
 		header_tickerlabel = new JLabel("Ticker Symbol:");
 		header_numlabel = new JLabel("Number of Shares");
@@ -43,11 +44,11 @@ public class HeaderPanel extends JPanel{
 	}
 	
 	public String getTickerSymbol(){
-		return (header_tickerSymbol.getText() == null)? "" : header_tickerSymbol.getText();
+		return header_tickerSymbol.getText();
 	}
 	
 	public String getNumShares(){
-		return (header_numShares.getText() == null)? "" : header_numShares.getText();
+		return header_numShares.getText();
 	}
 	
 }

@@ -3,18 +3,22 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import api.IModel;
+import api.IShare;
+import api.Model;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel{
 	
 	private Table table;
 	private JLabel folioTotal;
+	private Model model;
+	private Frame frame;
 	
-	public MainPanel(IFrame f, IModel m){
-		
+	public MainPanel(Frame f, Model m){
+		model = m;
+		frame = f;
 		folioTotal = new JLabel("Empty Label");
-		table = new Table("Stocks",f,m);
+		table = new Table("Stocks",frame,model);
 		
 		folioTotal.setForeground(Color.blue);
 		
@@ -29,8 +33,10 @@ public class MainPanel extends JPanel{
 	/*Call this method every time we add/remove row from the table*/
 	public void updateTotal(String tabname){
 		double val = 0;
-		for(int i = 0; i < table.rows(); ++i){
-			val += (double) table.getRow(i)[4];
+		IShare[] s =  model.getFolio(frame.getCurrentTab().getName()).getShares();
+		int nShares = s.length;
+		for(int i = 0; i < nShares ; ++i){
+			val += s[i].getValueHolding();
 		}
 		folioTotal.setText("Total value for '" + tabname + "' is " + val + ".");
 	}

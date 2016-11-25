@@ -1,5 +1,7 @@
 package api;
 
+import java.io.IOException;
+
 public class Share implements IShare {
 
 	private String tickerSymbol;
@@ -15,9 +17,11 @@ public class Share implements IShare {
 		this.numShares = numShares;
 		quote = new Quote(true);
 		//catch exceptions when calling methods!
+		
 		updatePricePerShare();
 		updateValueHolding();
-		
+		System.out.println(pricePerShare);
+		System.out.println(valueHolding);
 	}
 	
 	@Override
@@ -55,18 +59,26 @@ public class Share implements IShare {
 		updatePricePerShare();
 		return pricePerShare;
 	}
-	@Override
-	public void updatePricePerShare() {
-		// call a method here that sets the updated value for price per share
+	
+	private void updatePricePerShare() {
+		try {
+			quote.setValues(tickerSymbol);
+			pricePerShare= quote.getLatest();
+		} catch (IOException | WebsiteDataException | NoSuchTickerException | MethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			/* TRY TO CATCH'EM ALL*/
+		}
+		
 	}
 	@Override
 	public double getValueHolding() {
-		updatePricePerShare();
 		updateValueHolding();
 		return valueHolding;
 	}
-	@Override
-	public void updateValueHolding() {
-		// call a method here that sets the updated value for 
+	
+	private void updateValueHolding() {
+		updatePricePerShare();
+		valueHolding = pricePerShare * numShares;
 	}
 }

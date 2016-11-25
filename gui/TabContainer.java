@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 
-import api.IModel;
+import api.Model;
 
 
 @SuppressWarnings("serial")
@@ -13,12 +13,12 @@ public class TabContainer extends JPanel{
 	private MainPanel main;
 	private HeaderPanel header;
 
-	public TabContainer(String name, IFrame f, IModel m){
+	public TabContainer(String name, Frame f, Model m){
 		this.setName(name);
 		
-		header = new HeaderPanel(f);
+		header = new HeaderPanel(f,m);
 		main = new MainPanel(f,m);
-		footer = new FooterPanel(f);
+		footer = new FooterPanel(f,m);
 		
 		header.setPreferredSize(new Dimension(900, 50));
 		main.setPreferredSize(new Dimension(900, 480));

@@ -25,9 +25,9 @@ public class EditRow implements MouseListener{
 			ITable t = frame.getITable();
 			if(t.getTable().getSelectedRow() != -1){
 				
-				Object[] row = t.getRow(t.getTable().getSelectedRow());
+				//Object[] row = t.getRow(t.getTable().getSelectedRow());
 				
-				JOptionPane.showInputDialog(null,customPanel(row),"TO DO: CHANGE THIS NAME AND OPTIONS",JOptionPane.OK_CANCEL_OPTION);
+				//JOptionPane.showInputDialog(null,customPanel(row),"TO DO: CHANGE THIS NAME AND OPTIONS",JOptionPane.OK_CANCEL_OPTION);
 				
 				
 				

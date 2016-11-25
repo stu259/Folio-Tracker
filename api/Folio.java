@@ -11,8 +11,15 @@ public class Folio implements IFolio{
 		count = 0;
 	}
 	
-	public Map<String, IShare> getFolioList(){
-		return shares;
+	@Override
+	public IShare[] getShares(){
+		IShare[] s = new Share[shares.size()];
+		int i = 0;
+		for(String k: shares.keySet()){
+			s[i] = shares.get(k);
+			++i;
+		}
+		return s;
 	}
 	/**
 	 * 
@@ -25,6 +32,7 @@ public class Folio implements IFolio{
 	public void addShare(String tickerSymbol, String stockName, int numShares ){
 		if(shares.containsKey(tickerSymbol)){
 			shares.get(tickerSymbol).incrementShares(numShares);
+			return;
 		}
 			
 		IShare tempShare = new Share(tickerSymbol, stockName, numShares); 

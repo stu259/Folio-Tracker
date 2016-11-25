@@ -2,11 +2,10 @@ package gui;
 
 import javax.swing.JTable;
 
-public interface ITable {
+import api.IFolio;
 
-	void addRow(String symbol, int nShares);
+public interface ITable {
+	
 	JTable getTable();
-	Object[] getRow(int index);
-	Object[] getRow(String tSymbol);
-	void updateRow(int amount, String tSymbol);
+	void update(IFolio f);
 }

@@ -17,9 +17,6 @@ public abstract interface IShare {
 
 	public double getPricePerShare();
 
-	public void updatePricePerShare();
-
 	public double getValueHolding();
 
-	public void updateValueHolding();
 }

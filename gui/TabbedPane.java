@@ -2,14 +2,14 @@ package gui;
 
 import javax.swing.*;
 
-import api.IModel;
+import api.Model;
 
 @SuppressWarnings("serial")
 public class TabbedPane extends JTabbedPane{
-	private IFrame frame;
-	private IModel model;
+	private Frame frame;
+	private Model model;
 
-	public TabbedPane(String name, IFrame f, IModel m){
+	public TabbedPane(String name, Frame f, Model m){
 		this.setName(name);
 		model = m;
 		frame = f;

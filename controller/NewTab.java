@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import api.Model;
+
 public class NewTab implements ActionListener{
 	
 	// For double-click for editing use different listener instead of ActionListener
@@ -13,30 +15,34 @@ public class NewTab implements ActionListener{
 	//Shouldnt be done directly as reference but with some interface of the frame!
 	//Otherwise correct decoupling :) YAS
 	
-	IFrame frame;
+	private Frame frame;
+	private Model model;
 	
-	public NewTab(IFrame f)
+	public NewTab(Frame f, Model m)
 	{
 		frame = f;
+		model = m;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String tabname = JOptionPane.showInputDialog("Please name your tab");
+		String folioName = JOptionPane.showInputDialog("Please name your tab");
 		
 		boolean invalidName = true;
 		
 		while(invalidName){
-			if(tabname != null)
-				tabname = tabname.trim();
+			if(folioName != null)
+				folioName = folioName.trim();
 			else
 				return;
-			if(!((tabname == null) || tabname.equals(""))){
-				frame.addTab(tabname);
+			if(!((folioName == null) || folioName.equals("") || model.getFolioNames().contains(folioName))){
+				frame.setFolioName(folioName);
 				invalidName = false;
+				
+				model.createFolio(frame.getFolioName());
 				break;
 			}
-			tabname = JOptionPane.showInputDialog("You Entered nothing, Please retry");
+			folioName = JOptionPane.showInputDialog("You Entered nothing or a duplicate, Please retry");
 		}
 		
 	}

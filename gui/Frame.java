@@ -1,26 +1,37 @@
 package gui;
 
 import controller.*;
+
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.*;
 
-import api.IModel;
+import api.IFolio;
+import api.Model;
 
 
 
 @SuppressWarnings("serial")
-public class Frame extends JFrame implements IFrame{
+public class Frame extends JFrame implements Observer{
 
-	Menu menu;
-	TabbedPane pane;
-	IModel model;
+	private Menu menu;
+	private TabbedPane pane;
+	private String folioName;
+	private String oldFolioName = "";
 	
-	public Frame(String name, IModel m){
+	private Model model;
+	
+	
+	public Frame(String name, Model m){
 		this.setName(name);
 		
 		model = m;
 		
 		menu = new Menu("Folio");   
 		pane = new TabbedPane("FolioTracker TabbedPane", this, model);
+		
+		this.model.addObserver(this);
 		
 		this.add(pane);
 		this.setSize(900, 700);
@@ -30,6 +41,29 @@ public class Frame extends JFrame implements IFrame{
 		this.setVisible(true);
 		
 		addListeners();
+	}
+	
+	public void setFolioName(String name){
+		if(folioName != null)
+			oldFolioName = folioName;
+		folioName = name;
+	}
+	
+	public String getFolioName(){
+		return folioName;
+	}
+	
+	@Override
+	public void update(Observable o, Object arg){
+		if(!oldFolioName.equals(folioName)){
+			addTab(folioName);
+			oldFolioName = folioName;
+		}else if(getCurrentTab() != null && getTickerSymbol() != ""){
+			IFolio folio = model.getFolio(getCurrentTab().getName());
+			getITable().update(folio);
+		}else{
+			//Ticker symbol field is empty. Display error message
+		}
 	}
 	
 	
@@ -54,17 +88,17 @@ public class Frame extends JFrame implements IFrame{
 		//Add other menus here
 		//Add other menus' menuitems here
 		
-		create.addActionListener(new NewTab(this));
+		create.addActionListener(new NewTab(this,model));
 		exit.addActionListener(new ExitFrame(this));	
 		
 	}
+
 	
-	@Override
 	public void updateTotalLabel(){
 		((TabContainer) getCurrentTab()).getMain().updateTotal(getCurrentTab().getName());
 	}
 	
-	@Override
+	
 	public void closeTab(){
 		/* Consider writing to file before closing the panel */
 		pane.remove(getCurrentTab());
@@ -83,14 +117,14 @@ public class Frame extends JFrame implements IFrame{
 		menu.getMenuBar().add(m);
 	}
 	
-	@Override
+	
 	public void addTab(String name){
 		pane.addTabb(name);
 	}
 	
-	@Override
+	
 	public TabContainer getCurrentTab(){
-		return (TabContainer) pane.getSelectedComponent();
+		return (pane.getSelectedComponent() == null) ? null : (TabContainer) pane.getSelectedComponent();
 	}
 	
 	
@@ -98,7 +132,7 @@ public class Frame extends JFrame implements IFrame{
 		return pane;
 	}
 
-	@Override
+	
 	public ITable getITable(){
 		return getCurrentTab().getMain().getTable();
 	}
@@ -106,20 +140,20 @@ public class Frame extends JFrame implements IFrame{
 	
 	/* Some methods that holds the information that the user inputed so we can use it */
 	
-	@Override
+	
 	public String getTickerSymbol() {
 		return getCurrentTab().getHeader().getTickerSymbol();
 	}
 
 
-	@Override
+	
 	public int getNShares() {
 		
 		return (getCurrentTab().getHeader().getNumShares() == "") ? 0 : Integer.parseInt(getCurrentTab().getHeader().getNumShares());
 	}
 
 
-	@Override
+	
 	public void exit() {
 		/*Add code for saving or other functions to be executed before actually exiting the program*/
 		System.exit(0);

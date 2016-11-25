@@ -17,8 +17,8 @@ public class Save implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		ITable t = frame.getITable();
 		for(int i = 0; i < t.getTable().getRowCount(); ++i){
-			Object[] row = t.getRow(i);
-			String tSymbol = (String) row[0];
+			//Object[] row = t.getRow(i);
+			//String tSymbol = (String) row[0];
 			/*
 			(String) row[0] - Ticker Symbol
 			(String) row[1] - Share Name

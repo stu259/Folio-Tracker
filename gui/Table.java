@@ -4,8 +4,10 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import api.IModel;
-import controller.EditRow;
+import api.IFolio;
+import api.IShare;
+import api.Model;
+//import controller.EditRow;
 
 @SuppressWarnings("serial")
 public class Table extends JPanel implements ITable{
@@ -22,22 +24,22 @@ public class Table extends JPanel implements ITable{
 	
 	private DefaultTableModel tModel;
 	
-	private IFrame frame;
-	private IModel model;
+	private Frame frame;
+	//private Model model;
 	
 	private JTable table;
 
 	
-	public Table(String name, IFrame f, IModel m){
+	public Table(String name, Frame f, Model m){
 		this.setName(name);
 		frame = f;
-		model = m;
+		//model = m;
 		
 		
 		table = new JTable();
 		table.setFillsViewportHeight(true);
 		table.setPreferredSize(new Dimension(870, 430));
-		table.addMouseListener(new EditRow(f/*Probably need information from the back-end here*/));
+		//table.addMouseListener(new EditRow(f));
 		
 		
 		tModel = new DefaultTableModel(data, columnames) {
@@ -58,59 +60,41 @@ public class Table extends JPanel implements ITable{
 	}
 	
 	public int rows(){
-		return table.getRowCount();
+		return tModel.getRowCount();
 	}
 	
 	public JTable getTable(){
 		return table;
 	}
 	
+	/*
+	    row[0] = ticker symbol
+		row[1] = stock name
+		row[2] = number of shares
+		row[3] = price per share
+		row[4] = holding value
+	*/
 	@Override
-	public Object[] getRow(int index){
-		Object[] row = new Object[5];
-		row[0] = tModel.getValueAt(index, 0);
-		row[1] = tModel.getValueAt(index, 1);
-		row[2] = tModel.getValueAt(index, 2);
-		row[3] = tModel.getValueAt(index, 3);
-		row[4] = tModel.getValueAt(index, 4);
-		
-		return row;
+	public void update(IFolio f) {
+		clearTable();
+		IShare[] shares = f.getShares();
+		for(IShare s : shares){
+			Object[] row = new Object[5];
+			row[0] = (String) s.getTickerSymbol();
+			row[1] = (String) s.getStockName();
+			row[2] = (int) s.getNumShares();
+			row[3] = (double) s.getPricePerShare();
+			row[4] = (double) s.getValueHolding();
+			
+			tModel.addRow(row);
+			frame.updateTotalLabel();
+		}
 	}
 	
-	@Override
-	public void addRow(String symbol, int nShares){
-		Object[] row = new Object[5];
-		
-		row[0] = symbol;
-		row[1] = "Stock Name";
-		row[2] = nShares;
-		row[3] = 1.0;
-		row[4] = 100.0;
-		
-		tModel.addRow(row);
-		
-		frame.updateTotalLabel();
-		
-		//int current number of rows = something
-		/* sName = insert api interface here.GETSHRE NAME SOMEHOW */
-		/* price = insert api interface here.GETPRICE  SOMEHOW */
-		/* value = insert api interface here.GETVALUE SOMEHOW */
-	}
-
-	@Override
-	public Object[] getRow(String tSymbol) {
+	private void clearTable(){
 		for(int i = 0; i < tModel.getRowCount(); ++i){
-			if(tSymbol.equals(((String) getRow(i)[0]))){
-				return getRow(i);
-			}
+			tModel.removeRow(i);
 		}
-		return null;
-	}
-
-	@Override
-	public void updateRow(int amount, String tSymbol) {
-		// model . update shares info
-		// update table information from calling the back end
 	}
 	
 }
