@@ -2,13 +2,13 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import gui.Frame;
+import gui.IFrame;
 
 public class CloseTab implements ActionListener{
 
-	Frame frame;
+	private IFrame frame;
 	
-	public CloseTab(Frame f){
+	public CloseTab(IFrame f){
 		frame = f;
 	}
 	

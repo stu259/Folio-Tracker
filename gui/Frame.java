@@ -8,22 +8,22 @@ import java.util.Observer;
 import javax.swing.*;
 
 import api.IFolio;
-import api.Model;
+import api.IModel;
 
 
 
 @SuppressWarnings("serial")
-public class Frame extends JFrame implements Observer{
+public class Frame extends JFrame implements Observer, IFrame{
 
 	private Menu menu;
 	private TabbedPane pane;
 	private String folioName;
 	private String oldFolioName = "";
 	
-	private Model model;
+	private IModel model;
 	
 	
-	public Frame(String name, Model m){
+	public Frame(String name, IModel m){
 		this.setName(name);
 		
 		model = m;
@@ -31,7 +31,7 @@ public class Frame extends JFrame implements Observer{
 		menu = new Menu("Folio");   
 		pane = new TabbedPane("FolioTracker TabbedPane", this, model);
 		
-		this.model.addObserver(this);
+		this.model.addObserver((Observer) this);
 		
 		this.add(pane);
 		this.setSize(900, 700);

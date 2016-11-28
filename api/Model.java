@@ -14,18 +14,20 @@ import javax.swing.JOptionPane;
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
-public class Model extends Observable{
+public class Model extends java.util.Observable implements IModel{
 	private Map<String,IFolio> folios;
 	
 	public Model(){
 		folios = new HashMap<String,IFolio>();
 		
 	}
-
+	
+	@Override
 	public Set<String> getFolioNames(){
 		return folios.keySet();
 	}
 	
+	@Override
 	public String getLastFolio(){
 		@SuppressWarnings("rawtypes")
 		Iterator itr = folios.keySet().iterator();
@@ -36,15 +38,18 @@ public class Model extends Observable{
 	    return lastElement;
 	}
 	
+	@Override
 	public void createFolio(String name){
 		folios.put(name, new Folio());
 		update();
 	}
 	
+	@Override
 	public void addFolio(IFolio f){
 		update();
 	}
 	
+	@Override
 	public IFolio getFolio(String name){
 		return folios.get(name);
 	}
@@ -53,12 +58,14 @@ public class Model extends Observable{
 		setChanged();
 		notifyObservers();
 	}
-
+	
+	@Override
 	public void buyShares(String folioName, String tSymbol, int nShares) {
 		folios.get(folioName).addShare(tSymbol, "Default Share Name", nShares);
 		update();
 	} 
 	
+	@Override
 	public void sellShares(String folioName, String tSymbol, int amount){
 		try {
 			folios.get(folioName).removeShare(tSymbol, amount);

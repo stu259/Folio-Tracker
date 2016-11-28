@@ -1,7 +1,7 @@
 package gui;
 import javax.swing.*;
 
-import api.Model;
+import api.IModel;
 import controller.BuyShares;
 import controller.SellShares;
 
@@ -17,7 +17,7 @@ public class HeaderPanel extends JPanel{
 	private JTextField header_tickerSymbol;
 	private JTextField header_numShares;
 	
-	public HeaderPanel(Frame f, Model m){
+	public HeaderPanel(IFrame f, IModel m){
 		
 		header_buy = new JButton("Buy");
 		header_sell = new JButton("Sell");

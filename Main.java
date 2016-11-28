@@ -1,7 +1,7 @@
 import gui.IFrame;
 import api.Model;
-import api.IModel;
 import gui.Frame;
+import api.IModel;
 
 public class Main {
 
@@ -9,11 +9,11 @@ public class Main {
 		
 		
 		/* Create the Model*/
-		Model model = new Model();
+		IModel model = new Model();
 		
 		
 		/*Create View of the model*/
-		Frame f = new Frame("Folio Tracker", model);
+		IFrame f = new Frame("Folio Tracker", model);
 		
 		
 		/*

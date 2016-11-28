@@ -1,0 +1,5 @@
+/InvalidNumberOfSharesException.class
+/InvalidStockException.class
+/MethodException.class
+/NoSuchTickerException.class
+/WebsiteDataException.class

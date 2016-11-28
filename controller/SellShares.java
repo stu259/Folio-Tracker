@@ -3,15 +3,15 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import api.Model;
-import gui.Frame;
+import api.IModel;
+import gui.IFrame;
 
 public class SellShares implements ActionListener{
 	
-	Frame frame;
-	Model model;
+	private IFrame frame;
+	private IModel model;
 	
-	public SellShares(Frame f, Model m){
+	public SellShares(IFrame f, IModel m){
 		frame = f;
 		model = m;
 	}

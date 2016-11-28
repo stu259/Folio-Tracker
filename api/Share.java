@@ -24,8 +24,6 @@ public class Share implements IShare {
 		
 		updatePricePerShare();
 		updateValueHolding();
-		System.out.println(pricePerShare);
-		System.out.println(valueHolding);
 	}
 	
 	@Override

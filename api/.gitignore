@@ -1,0 +1,15 @@
+/Folio.class
+/IFolio.class
+/IQuote.class
+/IShare.class
+/InfoGetter.class
+/Load.class
+/MethodException.class
+/NoSuchTickerException.class
+/Quote.class
+/Share.class
+/WebsiteDataException.class
+/IModel.class
+/Model.class
+/Observer.class
+/Subject.class

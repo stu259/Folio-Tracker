@@ -1,7 +1,8 @@
 package gui;
 
 import java.awt.Component;
-public interface IFrame {
+import java.util.Observable;
+public interface IFrame extends java.util.Observer {
 	
 	/* Get selected tab's component*/
 	Component getCurrentTab();
@@ -26,5 +27,11 @@ public interface IFrame {
 	
 	/* Update the label information for the current tab */
 	void updateTotalLabel();
+	
+	void update(Observable o, Object arg);
+	
+	void setFolioName(String name);
+	
+	String getFolioName();
 	
 }

@@ -4,21 +4,21 @@ import java.awt.*;
 import javax.swing.*;
 
 import api.IShare;
-import api.Model;
+import api.IModel;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel{
 	
 	private Table table;
 	private JLabel folioTotal;
-	private Model model;
-	private Frame frame;
+	private IModel model;
+	private IFrame frame;
 	
-	public MainPanel(Frame f, Model m){
+	public MainPanel(IFrame f, IModel m){
 		model = m;
 		frame = f;
 		folioTotal = new JLabel("Empty Label");
-		table = new Table("Stocks",frame,model);
+		table = new Table("Stocks",frame);
 		
 		folioTotal.setForeground(Color.blue);
 		

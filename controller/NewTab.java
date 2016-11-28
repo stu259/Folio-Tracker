@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import api.Model;
+import api.IModel;
 
 public class NewTab implements ActionListener{
 	
@@ -15,10 +15,10 @@ public class NewTab implements ActionListener{
 	//Shouldnt be done directly as reference but with some interface of the frame!
 	//Otherwise correct decoupling :) YAS
 	
-	private Frame frame;
-	private Model model;
+	private IFrame frame;
+	private IModel model;
 	
-	public NewTab(Frame f, Model m)
+	public NewTab(IFrame f, IModel m)
 	{
 		frame = f;
 		model = m;

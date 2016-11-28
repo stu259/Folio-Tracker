@@ -3,7 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
-import api.Model;
+import api.IModel;
 import controller.CloseTab;
 
 @SuppressWarnings("serial")
@@ -12,7 +12,7 @@ public class FooterPanel extends JPanel{
 	private JButton footer_close;
 	private JButton footer_delete;
 		
-	public FooterPanel(Frame f, Model m){
+	public FooterPanel(IFrame f, IModel m){
 		JPanel labelPanel = new JPanel();
 		JPanel buttonPanel = new JPanel();
 		

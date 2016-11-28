@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 
 import api.IFolio;
 import api.IShare;
-import api.Model;
 //import controller.EditRow;
 
 @SuppressWarnings("serial")
@@ -24,22 +23,19 @@ public class Table extends JPanel implements ITable{
 	
 	private DefaultTableModel tModel;
 	
-	private Frame frame;
-	//private Model model;
+	private IFrame frame;
 	
 	private JTable table;
 
 	
-	public Table(String name, Frame f, Model m){
+	public Table(String name, IFrame f){
 		this.setName(name);
 		frame = f;
-		//model = m;
 		
 		
 		table = new JTable();
 		table.setFillsViewportHeight(true);
 		table.setPreferredSize(new Dimension(870, 430));
-		//table.addMouseListener(new EditRow(f));
 		
 		
 		tModel = new DefaultTableModel(data, columnames) {
