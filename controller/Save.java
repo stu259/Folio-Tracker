@@ -1,36 +1,56 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import java.awt.event.ActionListener;
 
+import gui.Frame;
 import gui.IFrame;
 import gui.ITable;
+import api.Folio;
+import api.IFolio;
+import api.Model;
 
 public class Save implements ActionListener{
 
-	IFrame frame;
+	private IFrame frame;
+	private Model model;
 	
-	public Save(IFrame f){
-		frame = f;
+	public Save(Frame frame, Model m){
+		frame = frame;
+		model = m;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ITable t = frame.getITable();
-		for(int i = 0; i < t.getTable().getRowCount(); ++i){
-			//Object[] row = t.getRow(i);
-			//String tSymbol = (String) row[0];
-			/*
-			(String) row[0] - Ticker Symbol
-			(String) row[1] - Share Name
-			(int) row[2] - Number of Shares
-			(double) row[3] - initial price
-			(double) row[4] - holding value
-			*/
+		
+		int numTabs = frame.getNumTabs();
+		ArrayList<String> tabArr = new ArrayList<String>();
+		tabArr = frame.getAllTabs();
+		
+		
+		for(int i = 0; i<= numTabs; i++){
+			try{
+			IFolio currFolio = model.getFolio(tabArr.get(i));
 			
-			//String toBeWrittern = tSymbol + .. all the rest;
 			
+				FileOutputStream fileOut = new FileOutputStream("/tmp/testing" );
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				out.writeObject((Folio)currFolio);
+				out.close();
+				fileOut.close();
+				System.out.println("Saved as testing");
+			}
+			catch(IOException exception){
+				exception.printStackTrace();
+			}
+			
+		}
+		
 		}
 	}
 	
 
-}
+
