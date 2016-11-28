@@ -1,4 +1,4 @@
-package api;
+package exceptions;
 ///:MethodException.java
 
 public class MethodException extends Exception{

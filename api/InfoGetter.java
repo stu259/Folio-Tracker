@@ -1,5 +1,6 @@
 package api;
 
+import exceptions.MethodException;
 
 public class InfoGetter {
 	

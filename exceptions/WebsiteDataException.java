@@ -1,19 +1,21 @@
-package api;
-///: NoSuchTickerException.java
+package exceptions;
+///: WebsiteDataException.java
 
-public class NoSuchTickerException extends Exception{
+public class WebsiteDataException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/////////////// Constructor ///////////////
+	
 	/**
 	 * Default constructor
 	 * 
 	 * @param s the exception to be thrown.
 	 */
-	public NoSuchTickerException( String s ) {
+	public WebsiteDataException( String s ) {
 		
 		super(s);
 		

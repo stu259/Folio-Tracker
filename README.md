@@ -8,3 +8,5 @@ Row Editing?
 Status Label ? (Replace total on bottom of folio if we want it there)
 IModel methods for getting/updating information from the back-end
 Observer Model
+
+// throw error message for NoSuckTickerException

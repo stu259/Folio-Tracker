@@ -1,10 +1,18 @@
 package api;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.*;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
+
+import javax.swing.JOptionPane;
+
+import exceptions.InvalidNumberOfSharesException;
+import exceptions.InvalidStockException;
 
 public class Model extends Observable{
 	private Map<String,IFolio> folios;
@@ -49,10 +57,21 @@ public class Model extends Observable{
 	public void buyShares(String folioName, String tSymbol, int nShares) {
 		folios.get(folioName).addShare(tSymbol, "Default Share Name", nShares);
 		update();
-	}
+	} 
 	
 	public void sellShares(String folioName, String tSymbol, int amount){
-		folios.get(folioName).removeShare(tSymbol, amount);
+		try {
+			folios.get(folioName).removeShare(tSymbol, amount);
+		}
+		catch(InvalidNumberOfSharesException ex) {
+			showMessageDialog(null, "You don't have that many shares for ticker: " + tSymbol, "Can't sell that many",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		catch(InvalidStockException e) {
+			showMessageDialog(null, "You can not sell a stock you don't have for ticker: " + tSymbol, "Invalid Stock",
+					JOptionPane.ERROR_MESSAGE);
+		}
 		update();
 	}
+	
 }

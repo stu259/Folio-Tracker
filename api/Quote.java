@@ -27,6 +27,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import exceptions.MethodException;
+import exceptions.NoSuchTickerException;
+import exceptions.WebsiteDataException;
+
 public class Quote implements IQuote {
 
 	/**
@@ -60,7 +64,7 @@ public class Quote implements IQuote {
 	 * This method gets the web page containing the share price information and
 	 * sets up the data for reterival
 	 * 
-	 * @throws IOException
+	 * @throws IOException 
 	 * @throws WebsiteDataException
 	 * @throws NoSuchTickerException
 	 * @throws MethodException

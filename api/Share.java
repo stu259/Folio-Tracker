@@ -2,6 +2,10 @@ package api;
 
 import java.io.IOException;
 
+import exceptions.MethodException;
+import exceptions.NoSuchTickerException;
+import exceptions.WebsiteDataException;
+
 public class Share implements IShare {
 
 	private String tickerSymbol;

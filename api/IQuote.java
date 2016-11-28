@@ -1,6 +1,10 @@
 package api;
 import java.io.IOException;
 
+import exceptions.MethodException;
+import exceptions.NoSuchTickerException;
+import exceptions.WebsiteDataException;
+
 /**
  * public interface that allows the setting of and retrieval of share stock values
  * 
