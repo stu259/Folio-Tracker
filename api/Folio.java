@@ -28,13 +28,23 @@ public class Folio implements IFolio{
 		return s;
 	}
 	/**
-	 * 
-	 *shady first said dont give a shit about it returning a null :P
+	 * requires: tickerSymbol != null || tickerSymbol != ""
+	 * effects: returns from share collection if it exists
+	 * 			else returns null
 	 */
+	@Override
 	public IShare getShareAt(String ticker){
 		return shares.get(ticker);
 	}
 	
+	/**
+	 * requires: tickerSymbol != null || tickerSymbol != "" ||
+	 * 			 numShares != null 	  || numShares != ""	||
+	 * 			 stockName != null 	  || stockName != ""	||
+	 * modifies: this
+	 * effects: adds given share to the shares collection
+	 */
+	@Override
 	public void addShare(String tickerSymbol, String stockName, int numShares ) {
 		if(shares.containsKey(tickerSymbol)){
 			shares.get(tickerSymbol).incrementShares(numShares);
@@ -45,6 +55,13 @@ public class Folio implements IFolio{
 		shares.put(tickerSymbol, tempShare);
 	}
 	
+	/**
+	 * requires: tickerSymbol != null || tickerSymbol != "" ||
+	 * 			 numShares != null 	  || numShares != ""	||
+	 * modifies: this
+	 * effects: removes given share from the shares collection
+	 */
+	@Override
 	public boolean removeShare(String tickerSymbol, int numShares) throws InvalidNumberOfSharesException, InvalidStockException{
 		if(shares.containsKey(tickerSymbol)){
 			IShare tempShare = shares.get(tickerSymbol);
@@ -64,6 +81,4 @@ public class Folio implements IFolio{
 		}
 		return false;
 	}
-	
-	
 }
