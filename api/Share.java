@@ -70,7 +70,7 @@ public class Share implements IShare, Serializable {
 			quote.setValues(tickerSymbol);
 			
 			pricePerShare = (quote.getLatest() != null) ? quote.getLatest() : 0;
-		} catch (IOException | WebsiteDataException | NoSuchTickerException | MethodException e) {
+		} catch (IOException | MethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
@@ -78,6 +78,14 @@ public class Share implements IShare, Serializable {
 			
 			//model.setMessage("Error message goes here");
 			//model.setStatus("Error");
+		}
+		catch (NoSuchTickerException e) {
+			model.setMessage("Please insert a valid ticker value");
+			model.setStatus("Error");
+		}
+		catch (WebsiteDataException e) {
+			model.setMessage("Ticker is not valid");
+			model.setStatus("Error");
 		}
 		
 	}

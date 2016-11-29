@@ -21,6 +21,9 @@ public class DeleteFolio implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		String folioName = frame.getCurrentTab().getName();
 		model.deleteFolio(folioName);
+		File file = new File("src/folios/" + folioName + ".sur");
+		file.delete();
+		
 	}
 
 }

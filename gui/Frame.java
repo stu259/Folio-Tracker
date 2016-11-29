@@ -99,7 +99,7 @@ public class Frame extends JFrame implements Observer, IFrame{
 		
 		create.addActionListener(new NewFolio(this,model));
 		save.addActionListener(new Save(this, model));
-		open.addActionListener(new Load(model));
+		open.addActionListener(new Load(this,model));
 		refresh.addActionListener(new Refresh(this, model));
 		exit.addActionListener(new ExitFrame(this));	
 		

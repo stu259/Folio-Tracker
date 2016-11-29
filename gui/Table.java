@@ -81,20 +81,22 @@ public class Table extends JPanel implements ITable{
 		
 		
 		DecimalFormat Currency = new DecimalFormat("#0.00");
-		for(IShare s : f.getShares()){
-			
-			Object[] row = new Object[5];
-			row[0] = (String) s.getTickerSymbol();
-			row[1] = (String) s.getShareName();
-			row[2] = (int) s.getNumShares();
-			row[3] = Currency.format((double) s.getPricePerShare());
-			row[4] = Currency.format((double) s.getValueHolding());
-			
-			
-			tModel.addRow(row);
-			
+		if(f != null){
+			for(IShare s : f.getShares()){
+				
+				Object[] row = new Object[5];
+				row[0] = (String) s.getTickerSymbol();
+				row[1] = (String) s.getShareName();
+				row[2] = (int) s.getNumShares();
+				row[3] = Currency.format((double) s.getPricePerShare());
+				row[4] = Currency.format((double) s.getValueHolding());
+				
+				
+				tModel.addRow(row);
+				
+			}
+			frame.updateTotalLabel();
 		}
-		frame.updateTotalLabel();
 	}
 	
 	private void clearTable(){

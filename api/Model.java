@@ -83,9 +83,12 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	 */
 	@Override
 	public void addFolio(IFolio f, String name){
+		System.out.println("ADD FOLIO");
 		if(!(folios.containsKey(name))){
+			System.out.println("INSIDE LOOP FOLIO");
 			folios.put(name, f);
 		}
+		System.out.println(folios.get(name).toString());
 		setMessage(name);
 		setStatus("Load");
 	}
