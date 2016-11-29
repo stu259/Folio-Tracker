@@ -17,6 +17,9 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		
 	}
 	
+	/**
+	 * effects: calls update() if folio has any shares
+	 */
 	@Override
 	public void refresh(String name){
 		if(folios.get(name).getShares().length > 0)
@@ -34,7 +37,8 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	/**
 	 * requires: name != null || name != "" 	
 	 * modifies: this
-	 * effects: if a folio with the given name is present it is removed. Then calls update().
+	 * effects: if a folio with the given name is present it is removed. 
+	 *          Then calls update().
 	 */
 	@Override
 	public void deleteFolio(String name){
@@ -69,39 +73,61 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		update();
 	}
 	
-	@Override
-	public void addFolio(IFolio f){
-		update();
-	}
-	
+	/**
+	 * requires: name != null || name != "" ||
+	 *           f    != null
+	 * modifies: this
+	 * effects: adds the folio to the collection of folios if
+	 *          it isn't already there. Then update method is called. 
+	 */
 	@Override
 	public void addFolio(IFolio f, String name){
-		if(folios.containsKey(name)){
-			//error
-		}
-		else{
+		if(!(folios.containsKey(name))){
 			folios.put(name, f);
 		}
 		update();
 	}
 	
+	/**
+	 * requires: name != null || name != "" 	
+	 * effects: returns folio if name is a key.
+	 *                  or null if not a key.
+	 */
 	@Override
 	public IFolio getFolio(String name){
 		return folios.get(name);
 	}
 	
-	
+	/**
+	 * effects: shows that this(backend) has been changed and notifies
+	 *          observers(gui) that this has been updated.
+	 */
 	private void update(){
 		setChanged();
 		notifyObservers();
 	}
 	
+	/**
+	 * requires: tSymbol   != null    || tSymbol != "" ||
+	 * 			 nShares > 0 	      || 
+	 * 			 folioName != null 	  || folioName != ""	
+	 * effects:  calls add shares for the folio specified. It then calls update
+	 *           method
+	 */
 	@Override
 	public void buyShares(String folioName, String tSymbol, int nShares) {
 		folios.get(folioName).addShare(tSymbol, "Default Share Name", nShares);
 		update();
 	} 
 	
+	/**
+	 * requires: tSymbol   != null || tSymbol   != "" ||
+	 * 			 folioName != null || folioName != "" ||
+	 * 			 amount > 0	
+	 * effects: throws InvalidNumberOfSharesException if there aren't enough that share to be sold
+	 *          throws InvalidStockException if there is no share with the same name as specified
+	 *          calls removeShares for the folio specified. then calls update()
+	 */
 	@Override
 	public void sellShares(String folioName, String tSymbol, int amount){
 		try {
@@ -117,7 +143,14 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	
+	/**
+	 * requires: tSymbol != null || tSymbol != "" ||
+	 * 			 folioName    != null || folioName    != "" || 
+	 * 			 newName      != null || newName      != ""	
+	 * effects:  updates the name of the share by calling setShareName for the specific share.
+	 *           update() is then called.
+	 */
 	@Override
 	public void updateShare(String folioName, String tSymbol, String newName) {
 		folios.get(folioName).getShareAt(tSymbol).setShareName(newName);
