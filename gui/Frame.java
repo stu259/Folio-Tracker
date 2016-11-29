@@ -156,8 +156,12 @@ public class Frame extends JFrame implements Observer, IFrame{
 
 	
 	public int getNShares() {
-		
-		return (getCurrentTab().getHeader().getNumShares() == "") ? 0 : Integer.parseInt(getCurrentTab().getHeader().getNumShares());
+		try{
+			return Integer.parseInt(getCurrentTab().getHeader().getNumShares());
+		}catch(NumberFormatException e){
+			System.out.println("Catched the exception so gonna return 0 and do nothing");
+			return 0;
+		}
 	}
 
 

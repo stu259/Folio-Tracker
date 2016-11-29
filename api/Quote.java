@@ -152,7 +152,10 @@ public class Quote implements IQuote, Serializable {
 	 * 
 	 */
 	public Double getLatest() throws MethodException {
-		return ensureNotNull(_shareDataList.get(1)) ? Double.valueOf(_shareDataList.get(1)):null;
+		if(!_shareDataList.get(1).equals("N/A")){
+			return ensureNotNull(_shareDataList.get(1)) ? Double.valueOf(_shareDataList.get(1)):null;
+		}
+		return null;
 	}// end of getLatest
 
 	/**

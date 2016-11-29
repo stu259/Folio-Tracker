@@ -78,7 +78,7 @@ public class Table extends JPanel implements ITable{
 	@Override
 	public void update(IFolio f) {
 		clearTable();
-
+		
 		
 		DecimalFormat Currency = new DecimalFormat("#0.00");
 		for(IShare s : f.getShares()){
@@ -92,9 +92,9 @@ public class Table extends JPanel implements ITable{
 			
 			
 			tModel.addRow(row);
-			frame.updateTotalLabel();
 			
 		}
+		frame.updateTotalLabel();
 	}
 	
 	private void clearTable(){
