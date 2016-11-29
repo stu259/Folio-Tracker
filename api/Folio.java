@@ -13,6 +13,9 @@ public class Folio implements IFolio{
 		shares = new HashMap<String, IShare>();
 	}
 	
+	/**
+	 * effects: returns the share collection
+	 */
 	@Override
 	public IShare[] getShares(){
 		IShare[] s = new Share[shares.size()];
@@ -23,6 +26,7 @@ public class Folio implements IFolio{
 		}
 		return s;
 	}
+	
 	/**
 	 * requires: tickerSymbol != null || tickerSymbol != ""
 	 * effects: returns from share collection if it exists
@@ -35,8 +39,8 @@ public class Folio implements IFolio{
 	
 	/**
 	 * requires: tickerSymbol != null || tickerSymbol != "" ||
-	 * 			 numShares != null 	  || numShares != ""	||
-	 * 			 shareName != null 	  || shareName != ""	||
+	 * 			 numShares > 0 	      || 
+	 * 			 shareName != null 	  || shareName != ""	
 	 * modifies: this
 	 * effects: adds given share to the shares collection
 	 */
@@ -53,9 +57,9 @@ public class Folio implements IFolio{
 	
 	/**
 	 * requires: tickerSymbol != null || tickerSymbol != "" ||
-	 * 			 numShares != null 	  || numShares != ""	||
+	 * 			 numShares > 0	
 	 * modifies: this
-	 * effects: removes given share from the shares collection
+	 * effects: removes given number of shares from the shares collection
 	 */
 	@Override
 	public boolean removeShare(String tickerSymbol, int numShares) throws InvalidNumberOfSharesException, InvalidStockException{
