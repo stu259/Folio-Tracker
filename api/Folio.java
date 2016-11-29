@@ -48,9 +48,16 @@ public class Folio implements IFolio, Serializable{
 			shares.get(tickerSymbol).incrementShares(numShares);
 			return;
 		}
-			
+		
+		
+		/* check if ticker symbol is valid */
+		
 		IShare tempShare = new Share(tickerSymbol, shareName, numShares); 
-		shares.put(tickerSymbol, tempShare);
+		if(tempShare.getPricePerShare() != 0)
+			shares.put(tickerSymbol, tempShare);
+		else
+			System.out.println("Invalid Ticker Name");
+		
 	}
 	
 	/**

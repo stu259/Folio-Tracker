@@ -68,7 +68,8 @@ public class Share implements IShare, Serializable {
 	private void updatePricePerShare() {
 		try {
 			quote.setValues(tickerSymbol);
-			pricePerShare= quote.getLatest();
+			
+			pricePerShare = (quote.getLatest() != null) ? quote.getLatest() : 0;
 		} catch (IOException | WebsiteDataException | NoSuchTickerException | MethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
