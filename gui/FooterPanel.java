@@ -4,7 +4,8 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 
 import api.IModel;
-import controller.CloseTab;
+import controller.CloseFolio;
+import controller.DeleteFolio;
 
 @SuppressWarnings("serial")
 public class FooterPanel extends JPanel{
@@ -19,8 +20,8 @@ public class FooterPanel extends JPanel{
 		footer_close = new JButton("Close");
 		footer_delete = new JButton("Delete");
 		
-		footer_close.addActionListener(new CloseTab(f));
-		//footer_delete.addActionListener(new DeleteTab(f));
+		footer_close.addActionListener(new CloseFolio(f));
+		footer_delete.addActionListener(new DeleteFolio(f,m));
 		
 		buttonPanel.add(footer_close);
 		buttonPanel.add(footer_delete);

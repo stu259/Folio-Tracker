@@ -7,36 +7,40 @@ import javax.swing.*;
 
 import gui.IFrame;
 import gui.ITable;
+import api.IModel;
 
-public class EditRow implements MouseListener{
+public class EditShare implements MouseListener{
 	
-	IFrame frame;
-	/* Need an interface of the API here probably */
+	private IFrame frame;
+	private IModel model;
 	
-	
-	/* Need an interface of the API here probably */
-	public EditRow(IFrame f){
+	public EditShare(IFrame f, IModel m){
+		model = m;
 		frame = f;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2) {
+			String folioName = frame.getCurrentTab().getName();
 			ITable t = frame.getITable();
-			if(t.getTable().getSelectedRow() != -1){
-				
-				//Object[] row = t.getRow(t.getTable().getSelectedRow());
-				
-				//JOptionPane.showInputDialog(null,customPanel(row),"TO DO: CHANGE THIS NAME AND OPTIONS",JOptionPane.OK_CANCEL_OPTION);
-				
-				
-				
-				frame.updateTotalLabel();
-			  }
+			String selectedTickerSymbol = t.getSelectedTicker();
+			
+			if(!selectedTickerSymbol.equals("")){
+			String shareName = JOptionPane.showInputDialog("Enter a new name for your share");
+			
+				if(shareName != null && shareName.trim().length() > 0){
+					shareName = shareName.trim();
+					model.updateShare(folioName, selectedTickerSymbol, shareName);
+					
+				}
+			}
+			
 		}
 		
 	}
 	
+	/*
 	private JPanel customPanel(Object[] row){
 		JPanel info = new JPanel();
 		
@@ -47,7 +51,7 @@ public class EditRow implements MouseListener{
 		String stockName = (String) row[1];
 		
 		
-		/* Calculate this so its actually accurate*/
+		
 		double gain = 0;
 		
 		JLabel editing = new JLabel("Editing portfolio:" + frame.getCurrentTab().getName());
@@ -75,7 +79,9 @@ public class EditRow implements MouseListener{
 		
 		return info;
 	}
+	*/
 
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub

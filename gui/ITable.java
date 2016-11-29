@@ -8,4 +8,5 @@ public interface ITable {
 	
 	JTable getTable();
 	void update(IFolio f);
+	String getSelectedTicker();
 }

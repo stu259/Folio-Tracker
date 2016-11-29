@@ -19,9 +19,14 @@ public class BuyShares implements ActionListener{
 		
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String name = frame.getTickerSymbol();
-		int amount = frame.getNShares();
-		model.buyShares(frame.getCurrentTab().getName(),name, amount);
+		
+		if(frame.getTickerSymbol() != null && frame.getTickerSymbol().length() > 0 && frame.getNShares() > 0){
+			String folioName = frame.getCurrentTab().getName();
+			String tSymbol = frame.getTickerSymbol();
+			int amount = frame.getNShares();
+			
+			model.buyShares(folioName,tSymbol, amount);
+		}
 	}
 
 }

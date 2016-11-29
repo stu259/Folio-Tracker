@@ -1,16 +1,8 @@
 package api;
 
 import static javax.swing.JOptionPane.showMessageDialog;
-import static javax.swing.JOptionPane.*;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Set;
-
+import java.util.*;
 import javax.swing.JOptionPane;
-
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
@@ -25,6 +17,12 @@ public class Model extends java.util.Observable implements IModel{
 	@Override
 	public Set<String> getFolioNames(){
 		return folios.keySet();
+	}
+	
+	@Override
+	public void deleteFolio(String name){
+		folios.remove(name);
+		update();
 	}
 	
 	@Override
@@ -54,6 +52,7 @@ public class Model extends java.util.Observable implements IModel{
 		return folios.get(name);
 	}
 	
+	
 	private void update(){
 		setChanged();
 		notifyObservers();
@@ -69,15 +68,21 @@ public class Model extends java.util.Observable implements IModel{
 	public void sellShares(String folioName, String tSymbol, int amount){
 		try {
 			folios.get(folioName).removeShare(tSymbol, amount);
+			update();
 		}
 		catch(InvalidNumberOfSharesException ex) {
 			showMessageDialog(null, "You don't have that many shares for ticker: " + tSymbol, "Can't sell that many",
 					JOptionPane.ERROR_MESSAGE);
 		}
 		catch(InvalidStockException e) {
-			showMessageDialog(null, "You can not sell a stock you don't have for ticker: " + tSymbol, "Invalid Stock",
+			showMessageDialog(null, "You can not sell a share you don't have for ticker: " + tSymbol, "Invalid Share",
 					JOptionPane.ERROR_MESSAGE);
 		}
+	}
+
+	@Override
+	public void updateShare(String folioName, String tSymbol, String newName) {
+		folios.get(folioName).getShareAt(tSymbol).setShareName(newName);
 		update();
 	}
 	

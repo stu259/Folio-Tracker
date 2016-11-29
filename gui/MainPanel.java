@@ -18,7 +18,7 @@ public class MainPanel extends JPanel{
 		model = m;
 		frame = f;
 		folioTotal = new JLabel("Empty Label");
-		table = new Table("Stocks",frame);
+		table = new Table("Stocks",frame,model);
 		
 		folioTotal.setForeground(Color.blue);
 		

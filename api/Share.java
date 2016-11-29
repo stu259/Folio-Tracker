@@ -9,16 +9,17 @@ import exceptions.WebsiteDataException;
 public class Share implements IShare {
 
 	private String tickerSymbol;
-	private String stockName;
+	private String shareName;
 	private int numShares;
 	private double pricePerShare;
 	private double valueHolding;
 	private IQuote quote;
 	
-	public Share(String tickerSymbol, String stockName, int numShares){
+	public Share(String tickerSymbol, String shareName, int numShares){
 		this.tickerSymbol = tickerSymbol;
-		this.stockName = stockName;
+		this.shareName = shareName;
 		this.numShares = numShares;
+		
 		quote = new Quote(true);
 		//catch exceptions when calling methods!
 		
@@ -41,12 +42,12 @@ public class Share implements IShare {
 		return tickerSymbol;
 	}
 	@Override
-	public String getStockName() {
-		return stockName;
+	public String getShareName() {
+		return shareName;
 	}
 	@Override
-	public void setStockName(String stockName) {
-		this.stockName = stockName;
+	public void setShareName(String shareName) {
+		this.shareName = shareName;
 	}
 	@Override
 	public int getNumShares() {

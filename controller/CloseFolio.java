@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import gui.IFrame;
 
-public class CloseTab implements ActionListener{
+public class CloseFolio implements ActionListener{
 
 	private IFrame frame;
 	
-	public CloseTab(IFrame f){
+	public CloseFolio(IFrame f){
 		frame = f;
 	}
 	

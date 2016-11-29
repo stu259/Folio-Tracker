@@ -2,6 +2,8 @@ package gui;
 
 import controller.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -58,11 +60,12 @@ public class Frame extends JFrame implements Observer, IFrame{
 		if(!oldFolioName.equals(folioName)){
 			addTab(folioName);
 			oldFolioName = folioName;
-		}else if(getCurrentTab() != null && getTickerSymbol() != ""){
+		}else if(getCurrentTab() != null && getTickerSymbol() != null && getTickerSymbol().length() > 0){
 			IFolio folio = model.getFolio(getCurrentTab().getName());
-			getITable().update(folio);
+			ITable t = getITable();
+			t.update(folio);
 		}else{
-			//Ticker symbol field is empty. Display error message
+			closeTab();
 		}
 	}
 	
@@ -80,7 +83,7 @@ public class Frame extends JFrame implements Observer, IFrame{
 		JMenu folio = menu.getMenuBar().getMenu(0);
 		JMenuItem create = folio.getItem(0); 
 		//JMenuItem open = folio.getItem(1);
-		//JMenuItem save= folio.getItem(2);
+		JMenuItem save= folio.getItem(2);
 		//JMenuItem comingSoon = ((JMenu) folio.getItem(4)).getItem(0); 
 		JMenuItem exit = folio.getItem(5);
 		
@@ -88,8 +91,11 @@ public class Frame extends JFrame implements Observer, IFrame{
 		//Add other menus here
 		//Add other menus' menuitems here
 		
-		create.addActionListener(new NewTab(this,model));
+		create.addActionListener(new NewFolio(this,model));
+		save.addActionListener(new Save(this, model));
 		exit.addActionListener(new ExitFrame(this));	
+		
+		
 		
 	}
 
@@ -157,6 +163,20 @@ public class Frame extends JFrame implements Observer, IFrame{
 	public void exit() {
 		/*Add code for saving or other functions to be executed before actually exiting the program*/
 		System.exit(0);
+	}
+
+	@Override
+	public int getNumTabs() {
+		return pane.getComponentCount();
+	}
+
+	@Override
+	public List<String> getAllTabs() {
+		List<String> tabs = new ArrayList<String>();
+		for(int i = 0; i < getNumTabs(); ++i){
+			tabs.add(((TabContainer) pane.getComponent(i)).getName());
+		}
+		return tabs;
 	}
 
 	

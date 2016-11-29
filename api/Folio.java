@@ -1,20 +1,16 @@
 package api;
 
 import java.util.HashMap;
-
 import java.util.Map;
-
-import javax.swing.JOptionPane;
 
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
 public class Folio implements IFolio{
 	Map<String,IShare> shares;
-	int count;
+	
 	public Folio(){
 		shares = new HashMap<String, IShare>();
-		count = 0;
 	}
 	
 	@Override
@@ -40,18 +36,18 @@ public class Folio implements IFolio{
 	/**
 	 * requires: tickerSymbol != null || tickerSymbol != "" ||
 	 * 			 numShares != null 	  || numShares != ""	||
-	 * 			 stockName != null 	  || stockName != ""	||
+	 * 			 shareName != null 	  || shareName != ""	||
 	 * modifies: this
 	 * effects: adds given share to the shares collection
 	 */
 	@Override
-	public void addShare(String tickerSymbol, String stockName, int numShares ) {
+	public void addShare(String tickerSymbol, String shareName, int numShares ) {
 		if(shares.containsKey(tickerSymbol)){
 			shares.get(tickerSymbol).incrementShares(numShares);
 			return;
 		}
 			
-		IShare tempShare = new Share(tickerSymbol, stockName, numShares); 
+		IShare tempShare = new Share(tickerSymbol, shareName, numShares); 
 		shares.put(tickerSymbol, tempShare);
 	}
 	

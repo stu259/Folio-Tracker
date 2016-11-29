@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import api.IModel;
 
-public class NewTab implements ActionListener{
+public class NewFolio implements ActionListener{
 	
 	// For double-click for editing use different listener instead of ActionListener
 	
@@ -18,7 +18,7 @@ public class NewTab implements ActionListener{
 	private IFrame frame;
 	private IModel model;
 	
-	public NewTab(IFrame f, IModel m)
+	public NewFolio(IFrame f, IModel m)
 	{
 		frame = f;
 		model = m;

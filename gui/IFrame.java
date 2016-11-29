@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Component;
 import java.util.Observable;
+import java.util.List;
 public interface IFrame extends java.util.Observer {
 	
 	/* Get selected tab's component*/
@@ -33,5 +34,9 @@ public interface IFrame extends java.util.Observer {
 	void setFolioName(String name);
 	
 	String getFolioName();
+	
+	int getNumTabs();
+	
+	List<String> getAllTabs();
 	
 }

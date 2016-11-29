@@ -7,9 +7,9 @@ public abstract interface IShare {
 	
 	public String getTickerSymbol();
 	
-	public String getStockName();
+	public String getShareName();
 
-	public void setStockName(String stockName);
+	public void setShareName(String stockName);
 
 	public int getNumShares();
 	

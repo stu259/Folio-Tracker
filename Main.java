@@ -13,6 +13,7 @@ public class Main {
 		
 		
 		/*Create View of the model*/
+		@SuppressWarnings("unused")
 		IFrame f = new Frame("Folio Tracker", model);
 		
 		
@@ -23,8 +24,7 @@ public class Main {
 		 Implement Open
 		 
 		 Implement Delete button in the Footer container
-		 Connect the GUI with the API
-		 Add observer Model
+
 		 Add refresh
 		 */
 	}

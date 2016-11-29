@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class InvalidNumberOfSharesException extends Exception {
 	
 	public InvalidNumberOfSharesException(String Ticker) {

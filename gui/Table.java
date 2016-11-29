@@ -5,7 +5,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import api.IFolio;
+import api.IModel;
 import api.IShare;
+import controller.EditShare;
 //import controller.EditRow;
 
 @SuppressWarnings("serial")
@@ -13,7 +15,7 @@ public class Table extends JPanel implements ITable{
 
 	private String[] columnames = {
 			"Ticker Symbol",
-			"Stock Name",
+			"Share Name",
 			"Number of Shares",
 			"Price per Share",
 			"Value of Holding"
@@ -28,7 +30,7 @@ public class Table extends JPanel implements ITable{
 	private JTable table;
 
 	
-	public Table(String name, IFrame f){
+	public Table(String name, IFrame f, IModel m){
 		this.setName(name);
 		frame = f;
 		
@@ -39,12 +41,13 @@ public class Table extends JPanel implements ITable{
 		
 		
 		tModel = new DefaultTableModel(data, columnames) {
-
 		    @Override
 		    public boolean isCellEditable(int row, int column) {
 		       return false;
 		    }
 		};
+		
+		table.addMouseListener(new EditShare(f, m));
 		
 		table.setModel(tModel);
 		
@@ -73,24 +76,43 @@ public class Table extends JPanel implements ITable{
 	@Override
 	public void update(IFolio f) {
 		clearTable();
-		IShare[] shares = f.getShares();
-		for(IShare s : shares){
+		System.out.println("CLEARING THE TABLE");
+		
+		
+		for(IShare s: f.getShares()){
+			System.out.println(s.getTickerSymbol() + "share.tickersymbol after update");
+		}
+		
+		
+		for(IShare s : f.getShares()){
+			
 			Object[] row = new Object[5];
 			row[0] = (String) s.getTickerSymbol();
-			row[1] = (String) s.getStockName();
+			row[1] = (String) s.getShareName();
 			row[2] = (int) s.getNumShares();
 			row[3] = (double) s.getPricePerShare();
 			row[4] = (double) s.getValueHolding();
 			
+			System.out.println(row[0] + "Row[0] ");
+			
 			tModel.addRow(row);
 			frame.updateTotalLabel();
+			
 		}
 	}
 	
 	private void clearTable(){
-		for(int i = 0; i < tModel.getRowCount(); ++i){
-			tModel.removeRow(i);
+		tModel.setRowCount(0);
+	}
+
+	@Override
+	public String getSelectedTicker() {
+		int selected = table.getSelectedRow();
+		if(selected >= 0){
+			return (String) tModel.getValueAt(selected, 0);
 		}
+		
+		return "";
 	}
 	
 }

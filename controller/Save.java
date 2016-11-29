@@ -3,35 +3,33 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 import java.awt.event.ActionListener;
 
 import gui.Frame;
 import gui.IFrame;
-import gui.ITable;
 import api.Folio;
 import api.IFolio;
-import api.Model;
+import api.IModel;
 
 public class Save implements ActionListener{
 
 	private IFrame frame;
-	private Model model;
+	private IModel model;
 	
-	public Save(Frame frame, Model m){
-		frame = frame;
+	public Save(Frame f, IModel m){
+		frame = f;
 		model = m;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		int numTabs = frame.getNumTabs();
-		ArrayList<String> tabArr = new ArrayList<String>();
+		List<String> tabArr = new ArrayList<String>();
 		tabArr = frame.getAllTabs();
 		
 		
-		for(int i = 0; i<= numTabs; i++){
+		for(int i = 0; i < numTabs; i++){
 			try{
 			IFolio currFolio = model.getFolio(tabArr.get(i));
 			

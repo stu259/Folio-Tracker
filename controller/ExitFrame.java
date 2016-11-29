@@ -2,13 +2,13 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import gui.Frame;
+import gui.IFrame;
 
 public class ExitFrame implements ActionListener{
 
-	Frame frame;
+	private IFrame frame;
 	
-	public ExitFrame(Frame f){
+	public ExitFrame(IFrame f){
 		frame = f;
 	}
 	@Override
