@@ -26,6 +26,8 @@ public interface IModel {
 	public void addObserver(java.util.Observer o);
 	
 	public void updateShare(String folioName, String tSymbol, String newName);
+
+	public void addFolio(IFolio f, String name);
 	
 	public void setStatus(String msg);
 	

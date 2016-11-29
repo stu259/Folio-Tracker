@@ -85,7 +85,7 @@ public class Frame extends JFrame implements Observer, IFrame{
 		*/
 		JMenu folio = menu.getMenuBar().getMenu(0);
 		JMenuItem create = folio.getItem(0); 
-		//JMenuItem open = folio.getItem(1);
+		JMenuItem open = folio.getItem(1);
 		JMenuItem save= folio.getItem(2);
 		JMenuItem refresh = ((JMenu) folio.getItem(4)).getItem(0); 
 		JMenuItem exit = folio.getItem(5);
@@ -96,7 +96,7 @@ public class Frame extends JFrame implements Observer, IFrame{
 		
 		create.addActionListener(new NewFolio(this,model));
 		save.addActionListener(new Save(this, model));
-		
+		open.addActionListener(new Load(this, model));
 		refresh.addActionListener(new Refresh(this, model));
 		exit.addActionListener(new ExitFrame(this));	
 		
