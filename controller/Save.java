@@ -3,14 +3,18 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.awt.event.ActionListener;
 
 import gui.Frame;
 import gui.IFrame;
+import gui.ITable;
 import api.Folio;
 import api.IFolio;
 import api.IModel;
+import api.Model;
 
 public class Save implements ActionListener{
 
@@ -29,12 +33,12 @@ public class Save implements ActionListener{
 		tabArr = frame.getAllTabs();
 		
 		
-		for(int i = 0; i < numTabs; i++){
+		for(int i = 0; i<= numTabs-1; i++){
 			try{
 			IFolio currFolio = model.getFolio(tabArr.get(i));
 			
 			
-				FileOutputStream fileOut = new FileOutputStream("/tmp/testing" );
+				FileOutputStream fileOut = new FileOutputStream(tabArr.get(i) + ".sur" );
 				ObjectOutputStream out = new ObjectOutputStream(fileOut);
 				out.writeObject((Folio)currFolio);
 				out.close();

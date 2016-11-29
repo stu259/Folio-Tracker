@@ -1,12 +1,14 @@
 package api;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import exceptions.MethodException;
 import exceptions.NoSuchTickerException;
 import exceptions.WebsiteDataException;
 
-public class Share implements IShare {
+@SuppressWarnings("serial")
+public class Share implements IShare, Serializable {
 
 	private String tickerSymbol;
 	private String shareName;

@@ -1,12 +1,15 @@
 package api;
 
 import static javax.swing.JOptionPane.showMessageDialog;
+
+import java.io.Serializable;
 import java.util.*;
 import javax.swing.JOptionPane;
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
-public class Model extends java.util.Observable implements IModel{
+@SuppressWarnings("serial")
+public class Model extends java.util.Observable implements IModel, Serializable{
 	private Map<String,IFolio> folios;
 	
 	public Model(){

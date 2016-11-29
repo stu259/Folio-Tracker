@@ -31,7 +31,7 @@ import exceptions.MethodException;
 import exceptions.NoSuchTickerException;
 import exceptions.WebsiteDataException;
 
-public class Quote implements IQuote {
+public class Quote implements IQuote, Serializable {
 
 	/**
 	 * Quote is a utility class that allows calling code to retrieve the latest
