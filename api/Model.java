@@ -1,16 +1,16 @@
 package api;
 
-import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.io.Serializable;
 import java.util.*;
-import javax.swing.JOptionPane;
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
 @SuppressWarnings("serial")
 public class Model extends java.util.Observable implements IModel, Serializable{
 	private Map<String,IFolio> folios;
+	private String status;
+	private String message;
 	
 	public Model(){
 		folios = new HashMap<String,IFolio>();
@@ -22,8 +22,9 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	 */
 	@Override
 	public void refresh(String name){
-		if(folios.get(name).getShares().length > 0)
-			update();
+		if(folios.get(name).getShares().length > 0){
+			setStatus("Refresh");
+		}
 	}
 	
 	/**
@@ -43,7 +44,7 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	@Override
 	public void deleteFolio(String name){
 		folios.remove(name);
-		//update();
+		setStatus("DeleteFolio");
 	}
 	
 	/**
@@ -69,10 +70,10 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	 */
 	@Override
 	public void createFolio(String name){
-		folios.put(name, new Folio());
-		update();
+		folios.put(name, new Folio(this));
+		setStatus("NewFolio");
 	}
-	
+
 	/**
 	 * requires: name != null || name != "" ||
 	 *           f    != null
@@ -85,7 +86,8 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		if(!(folios.containsKey(name))){
 			folios.put(name, f);
 		}
-		update();
+		setMessage(name);
+		setStatus("Load");
 	}
 	
 	/**
@@ -117,7 +119,7 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	@Override
 	public void buyShares(String folioName, String tSymbol, int nShares) {
 		folios.get(folioName).addShare(tSymbol, "Default Share Name", nShares);
-		update();
+		setStatus("BuyShare");
 	} 
 	
 	/**
@@ -132,15 +134,15 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	public void sellShares(String folioName, String tSymbol, int amount){
 		try {
 			folios.get(folioName).removeShare(tSymbol, amount);
-			update();
+			setStatus("SellShare");
 		}
 		catch(InvalidNumberOfSharesException ex) {
-			showMessageDialog(null, "You don't have that many shares for ticker: " + tSymbol, "Can't sell that many",
-					JOptionPane.ERROR_MESSAGE);
+			message = "You don't have that many shares for ticker: " + tSymbol;
+			setStatus("Error");
 		}
 		catch(InvalidStockException e) {
-			showMessageDialog(null, "You can not sell a share you don't have for ticker: " + tSymbol, "Invalid Share",
-					JOptionPane.ERROR_MESSAGE);
+			message = "You can not sell a share you don't have for ticker: " + tSymbol;
+			setStatus("Error");
 		}
 	}
 	
@@ -154,7 +156,29 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	@Override
 	public void updateShare(String folioName, String tSymbol, String newName) {
 		folios.get(folioName).getShareAt(tSymbol).setShareName(newName);
+		setStatus("UpdateShare");
+	}
+	
+	@Override
+	public void setStatus(String msg){
+		status = msg;
 		update();
 	}
+
+	@Override
+	public String getStatus() {
+		return status;
+	}
+	
+	@Override
+	public String getMessage(){
+		return message;
+	}
+	
+	@Override
+	public void setMessage(String msg){
+		message = msg;
+	}
+	
 	
 }

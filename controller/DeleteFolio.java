@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import api.IModel;
 import gui.IFrame;
@@ -19,8 +20,6 @@ public class DeleteFolio implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String folioName = frame.getCurrentTab().getName();
-		frame.closeTab();
-		frame.setFolioName("");
 		model.deleteFolio(folioName);
 	}
 

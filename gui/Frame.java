@@ -2,6 +2,11 @@ package gui;
 
 import controller.*;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -19,10 +24,10 @@ public class Frame extends JFrame implements Observer, IFrame{
 
 	private Menu menu;
 	private TabbedPane pane;
-	private String folioName;
-	private String oldFolioName = "";
+	private String lastInput;
 	
 	private IModel model;
+	
 	
 	
 	public Frame(String name, IModel m){
@@ -45,27 +50,28 @@ public class Frame extends JFrame implements Observer, IFrame{
 		addListeners();
 	}
 	
-	public void setFolioName(String name){
-		if(folioName != null)
-			oldFolioName = folioName;
-		folioName = name;
-	}
-	
-	public String getFolioName(){
-		return folioName;
-	}
 	
 	@Override
 	public void update(Observable o, Object arg){
-		if(!oldFolioName.equals(folioName)){
-			addTab(folioName);
-			oldFolioName = folioName;
-		}else if(getCurrentTab() != null && getTickerSymbol() != null && getTickerSymbol().length() > 0){
-			IFolio folio = model.getFolio(getCurrentTab().getName());
-			ITable t = getITable();
-			t.update(folio);
-		}else{
-			closeTab();
+		switch(model.getStatus()){
+			case "Error":
+				showMessage(null, model.getMessage());
+				break;
+			case "NewFolio":
+				addTab(lastInput);
+				break;
+			case "DeleteFolio":
+				closeTab();
+				break;
+			case "Load":
+				addTab(model.getMessage());
+				model.setStatus("Refresh");
+				break;
+			default:
+				IFolio folio = model.getFolio(getCurrentTab().getName());
+				ITable t = getITable();
+				t.update(folio);
+				break;
 		}
 	}
 	
@@ -93,7 +99,7 @@ public class Frame extends JFrame implements Observer, IFrame{
 		
 		create.addActionListener(new NewFolio(this,model));
 		save.addActionListener(new Save(this, model));
-		open.addActionListener(new Load(this, model));
+		open.addActionListener(new Load(model));
 		refresh.addActionListener(new Refresh(this, model));
 		exit.addActionListener(new ExitFrame(this));	
 		
@@ -108,7 +114,8 @@ public class Frame extends JFrame implements Observer, IFrame{
 	
 	
 	public void closeTab(){
-		/* Consider writing to file before closing the panel */
+		ActionListener save = this.getJMenuBar().getMenu(0).getItem(2).getActionListeners()[0];
+		save.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
 		pane.remove(getCurrentTab());
 	}
 	
@@ -183,6 +190,17 @@ public class Frame extends JFrame implements Observer, IFrame{
 			tabs.add(((TabContainer) pane.getComponent(i)).getName());
 		}
 		return tabs;
+	}
+
+	@Override
+	public void showMessage(Component parentComponent, String message) {
+		showMessageDialog(parentComponent, message);
+	}
+
+	@Override
+	public String getuserInput(String message) {
+		lastInput = JOptionPane.showInputDialog(message);
+		return lastInput;
 	}
 
 	

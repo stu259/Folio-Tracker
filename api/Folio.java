@@ -9,10 +9,12 @@ import exceptions.InvalidStockException;
 
 @SuppressWarnings("serial")
 public class Folio implements IFolio, Serializable{
-	Map<String,IShare> shares;
+	private Map<String,IShare> shares;
+	private IModel model;
 	
-	public Folio(){
+	public Folio(IModel m){
 		shares = new HashMap<String, IShare>();
+		model = m;
 	}
 	
 	/**
@@ -56,12 +58,13 @@ public class Folio implements IFolio, Serializable{
 		
 		/* check if ticker symbol is valid */
 		
-		IShare tempShare = new Share(tickerSymbol, shareName, numShares); 
-		if(tempShare.getPricePerShare() != 0)
+		IShare tempShare = new Share(tickerSymbol, shareName, numShares,model); 
+		if(tempShare.getPricePerShare() != 0){
 			shares.put(tickerSymbol, tempShare);
-		else
-			System.out.println("Invalid Ticker Name");
-		
+		}else{
+			model.setMessage("Invalid Ticker Name");
+			model.setStatus("Error");
+		}
 	}
 	
 	/**

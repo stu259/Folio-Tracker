@@ -3,8 +3,6 @@ package controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
-
 import gui.IFrame;
 import gui.ITable;
 import api.IModel;
@@ -27,7 +25,7 @@ public class EditShare implements MouseListener{
 			String selectedTickerSymbol = t.getSelectedTicker();
 			
 			if(!selectedTickerSymbol.equals("")){
-			String shareName = JOptionPane.showInputDialog("Enter a new name for your share");
+			String shareName = frame.getuserInput("Enter a new name for your share");
 			
 				if(shareName != null && shareName.trim().length() > 0){
 					shareName = shareName.trim();

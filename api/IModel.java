@@ -27,6 +27,12 @@ public interface IModel {
 
 	public void addFolio(IFolio f, String name);
 	
+	public void setStatus(String msg);
 	
+	public String getStatus();
+	
+	public String getMessage();
+	
+	public void setMessage(String msg);
 	
 }

@@ -31,12 +31,12 @@ public interface IFrame extends java.util.Observer {
 	
 	void update(Observable o, Object arg);
 	
-	void setFolioName(String name);
-	
-	String getFolioName();
-	
 	int getNumTabs();
 	
 	List<String> getAllTabs();
+	
+	public void showMessage(Component parentComponent, String message);
+	
+	public String getuserInput(String message);
 	
 }
