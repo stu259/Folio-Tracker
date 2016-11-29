@@ -17,22 +17,34 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		
 	}
 	
+	@Override
 	public void refresh(String name){
 		if(folios.get(name).getShares().length > 0)
 			update();
 	}
 	
+	/**
+	 * effects: returns all folio names as a set
+	 */
 	@Override
 	public Set<String> getFolioNames(){
 		return folios.keySet();
 	}
 	
+	/**
+	 * requires: name != null || name != "" 	
+	 * modifies: this
+	 * effects: if a folio with the given name is present it is removed. Then calls update().
+	 */
 	@Override
 	public void deleteFolio(String name){
 		folios.remove(name);
 		//update();
 	}
 	
+	/**
+	 * effects: returns the last folio added to the model
+	 */
 	@Override
 	public String getLastFolio(){
 		@SuppressWarnings("rawtypes")
@@ -44,6 +56,13 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	    return lastElement;
 	}
 	
+	/**
+	 * requires: name != null || name != "" 
+	 * modifies: this
+	 * effects: creates or overwrites a folio with the given name 
+	 *          and adds it to the collection of folios.
+	 *          finally update method is called. 
+	 */
 	@Override
 	public void createFolio(String name){
 		folios.put(name, new Folio());

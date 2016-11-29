@@ -40,12 +40,13 @@ public class Load implements ActionListener{
 		
 		FileInputStream fileIn = new FileInputStream(fileName);
 		ObjectInputStream in = new ObjectInputStream(fileIn);
-		
+
 		IFolio loadedFolio = (Folio) in.readObject();
 		in.close();
 		
 		frame.setFolioName(name);
 		model.addFolio(loadedFolio, name);
+
 		
 		
 	
