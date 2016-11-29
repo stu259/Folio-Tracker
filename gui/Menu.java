@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -18,13 +20,15 @@ public class Menu extends JMenuBar{
 		JMenuItem open = new JMenuItem("Open");
 		JMenuItem save = new JMenuItem("Save");
 		JMenuItem exit = new JMenuItem("Exit");
-		JMenuItem comingSoon = new JMenuItem("Refresh");
+		JMenuItem refresh = new JMenuItem("Refresh");
+		KeyStroke f5 = KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0);
+		refresh.setAccelerator(f5);
 		
 		menu.add(create);
 		menu.add(open);
 		menu.add(save);
 		menu.addSeparator();
-		submenu.add(comingSoon);
+		submenu.add(refresh);
 		menu.add(submenu);
 		menu.add(exit);
 		menubar.add(menu);
