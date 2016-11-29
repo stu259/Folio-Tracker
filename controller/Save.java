@@ -38,7 +38,7 @@ public class Save implements ActionListener{
 				out.writeObject((Folio)currFolio);
 				out.close();
 				fileOut.close();
-				System.out.println("Saved as testing");
+				System.out.println("Saved as " + tabArr.get(i));
 			}
 			catch(IOException exception){
 				exception.printStackTrace();
