@@ -31,6 +31,7 @@ import exceptions.MethodException;
 import exceptions.NoSuchTickerException;
 import exceptions.WebsiteDataException;
 
+@SuppressWarnings("serial")
 public class Quote implements IQuote, Serializable {
 
 	/**

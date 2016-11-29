@@ -78,12 +78,7 @@ public class Table extends JPanel implements ITable{
 	@Override
 	public void update(IFolio f) {
 		clearTable();
-		System.out.println("CLEARING THE TABLE");
-		
-		
-		for(IShare s: f.getShares()){
-			System.out.println(s.getTickerSymbol() + "share.tickersymbol after update");
-		}
+
 		
 		DecimalFormat Currency = new DecimalFormat("#0.00");
 		for(IShare s : f.getShares()){
@@ -95,7 +90,6 @@ public class Table extends JPanel implements ITable{
 			row[3] = Currency.format((double) s.getPricePerShare());
 			row[4] = Currency.format((double) s.getValueHolding());
 			
-			System.out.println(row[0] + "Row[0] ");
 			
 			tModel.addRow(row);
 			frame.updateTotalLabel();

@@ -17,6 +17,11 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		
 	}
 	
+	public void refresh(String name){
+		if(folios.get(name).getShares().length > 0)
+			update();
+	}
+	
 	@Override
 	public Set<String> getFolioNames(){
 		return folios.keySet();
@@ -25,7 +30,7 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	@Override
 	public void deleteFolio(String name){
 		folios.remove(name);
-		update();
+		//update();
 	}
 	
 	@Override
