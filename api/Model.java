@@ -56,6 +56,17 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 	}
 	
 	@Override
+	public void addFolio(IFolio f, String name){
+		if(folios.containsKey(name)){
+			//error
+		}
+		else{
+			folios.put(name, f);
+		}
+		update();
+	}
+	
+	@Override
 	public IFolio getFolio(String name){
 		return folios.get(name);
 	}
