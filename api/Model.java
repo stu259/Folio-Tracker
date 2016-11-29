@@ -69,11 +69,7 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		folios.put(name, new Folio(this));
 		setStatus("NewFolio");
 	}
-	
-	@Override
-	public void addFolio(IFolio f){
-		update();
-	}
+
 	
 	@Override
 	public void addFolio(IFolio f, String name){
@@ -83,7 +79,8 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		else{
 			folios.put(name, f);
 		}
-		update();
+		setMessage(name);
+		setStatus("Load");
 	}
 	
 	@Override

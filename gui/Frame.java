@@ -5,6 +5,8 @@ import controller.*;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -61,8 +63,9 @@ public class Frame extends JFrame implements Observer, IFrame{
 			case "DeleteFolio":
 				closeTab();
 				break;
-			case "OpenFolio":
-				
+			case "Load":
+				addTab(model.getMessage());
+				model.setStatus("Refresh");
 				break;
 			default:
 				IFolio folio = model.getFolio(getCurrentTab().getName());
@@ -96,7 +99,7 @@ public class Frame extends JFrame implements Observer, IFrame{
 		
 		create.addActionListener(new NewFolio(this,model));
 		save.addActionListener(new Save(this, model));
-		open.addActionListener(new Load(this, model));
+		open.addActionListener(new Load(model));
 		refresh.addActionListener(new Refresh(this, model));
 		exit.addActionListener(new ExitFrame(this));	
 		
@@ -111,7 +114,8 @@ public class Frame extends JFrame implements Observer, IFrame{
 	
 	
 	public void closeTab(){
-		/* Consider writing to file before closing the panel */
+		ActionListener save = this.getJMenuBar().getMenu(0).getItem(2).getActionListeners()[0];
+		save.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
 		pane.remove(getCurrentTab());
 	}
 	

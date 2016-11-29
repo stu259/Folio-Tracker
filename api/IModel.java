@@ -11,8 +11,6 @@ public interface IModel {
 	
 	public void createFolio(String name);
 	
-	public void addFolio(IFolio f);
-	
 	public IFolio getFolio(String name);
 	
 	public void deleteFolio(String name);
