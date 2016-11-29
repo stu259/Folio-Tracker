@@ -23,9 +23,13 @@ public class Main {
 		 Implement Save
 		 Implement Open
 		 
-		 Implement Delete button in the Footer container
-
-		 Add refresh
+		 Input Validation
+		 
+		 Handle all exceptions
+		 
+		 Method specs
+		 Unit tests
+		 Assertions
 		 */
 	}
 }

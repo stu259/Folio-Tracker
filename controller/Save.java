@@ -3,25 +3,20 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.awt.event.ActionListener;
 
-import gui.Frame;
 import gui.IFrame;
-import gui.ITable;
 import api.Folio;
 import api.IFolio;
 import api.IModel;
-import api.Model;
 
 public class Save implements ActionListener{
 
 	private IFrame frame;
 	private IModel model;
 	
-	public Save(Frame f, IModel m){
+	public Save(IFrame f, IModel m){
 		frame = f;
 		model = m;
 	}
