@@ -2,6 +2,9 @@ package gui;
 
 import controller.*;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -19,10 +22,10 @@ public class Frame extends JFrame implements Observer, IFrame{
 
 	private Menu menu;
 	private TabbedPane pane;
-	private String folioName;
-	private String oldFolioName = "";
+	private String lastInput;
 	
 	private IModel model;
+	
 	
 	
 	public Frame(String name, IModel m){
@@ -45,27 +48,27 @@ public class Frame extends JFrame implements Observer, IFrame{
 		addListeners();
 	}
 	
-	public void setFolioName(String name){
-		if(folioName != null)
-			oldFolioName = folioName;
-		folioName = name;
-	}
-	
-	public String getFolioName(){
-		return folioName;
-	}
 	
 	@Override
 	public void update(Observable o, Object arg){
-		if(!oldFolioName.equals(folioName)){
-			addTab(folioName);
-			oldFolioName = folioName;
-		}else if(getCurrentTab() != null && getTickerSymbol() != null && getTickerSymbol().length() > 0){
-			IFolio folio = model.getFolio(getCurrentTab().getName());
-			ITable t = getITable();
-			t.update(folio);
-		}else{
-			closeTab();
+		switch(model.getStatus()){
+			case "Error":
+				showMessage(null, model.getMessage());
+				break;
+			case "NewFolio":
+				addTab(lastInput);
+				break;
+			case "DeleteFolio":
+				closeTab();
+				break;
+			case "OpenFolio":
+				
+				break;
+			default:
+				IFolio folio = model.getFolio(getCurrentTab().getName());
+				ITable t = getITable();
+				t.update(folio);
+				break;
 		}
 	}
 	
@@ -183,6 +186,17 @@ public class Frame extends JFrame implements Observer, IFrame{
 			tabs.add(((TabContainer) pane.getComponent(i)).getName());
 		}
 		return tabs;
+	}
+
+	@Override
+	public void showMessage(Component parentComponent, String message) {
+		showMessageDialog(parentComponent, message);
+	}
+
+	@Override
+	public String getuserInput(String message) {
+		lastInput = JOptionPane.showInputDialog(message);
+		return lastInput;
 	}
 
 	

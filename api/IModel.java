@@ -27,6 +27,12 @@ public interface IModel {
 	
 	public void updateShare(String folioName, String tSymbol, String newName);
 	
+	public void setStatus(String msg);
 	
+	public String getStatus();
+	
+	public String getMessage();
+	
+	public void setMessage(String msg);
 	
 }

@@ -16,15 +16,15 @@ public class Share implements IShare, Serializable {
 	private double pricePerShare;
 	private double valueHolding;
 	private IQuote quote;
+	private IModel model;
 	
-	public Share(String tickerSymbol, String shareName, int numShares){
+	public Share(String tickerSymbol, String shareName, int numShares, IModel m){
 		this.tickerSymbol = tickerSymbol;
 		this.shareName = shareName;
 		this.numShares = numShares;
 		
-		quote = new Quote(true);
-		//catch exceptions when calling methods!
-		
+		quote = new Quote(false);
+		model = m;
 		updatePricePerShare();
 		updateValueHolding();
 	}
@@ -73,7 +73,11 @@ public class Share implements IShare, Serializable {
 		} catch (IOException | WebsiteDataException | NoSuchTickerException | MethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 			/* TRY TO CATCH'EM ALL*/
+			
+			//model.setMessage("Error message goes here");
+			//model.setStatus("Error");
 		}
 		
 	}
