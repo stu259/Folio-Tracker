@@ -159,22 +159,38 @@ public class Model extends java.util.Observable implements IModel, Serializable{
 		setStatus("UpdateShare");
 	}
 	
+	/**
+	 * requires: msg   != null    || msg != ""
+	 * modifies: status
+	 * effects:  changes status to msg and calls update()
+	 */
 	@Override
 	public void setStatus(String msg){
 		status = msg;
 		update();
 	}
-
+	
+	/**
+	 * effects: returns status
+	 */
 	@Override
 	public String getStatus() {
 		return status;
 	}
 	
+	/**
+	 * effects: returns message
+	 */
 	@Override
 	public String getMessage(){
 		return message;
 	}
 	
+	/**
+	 * requires: msg   != null    || msg != ""
+	 * modifies: message
+	 * effects:  changes message to msg and calls update()
+	 */
 	@Override
 	public void setMessage(String msg){
 		message = msg;
