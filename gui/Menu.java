@@ -18,7 +18,7 @@ public class Menu extends JMenuBar{
 		JMenuItem open = new JMenuItem("Open");
 		JMenuItem save = new JMenuItem("Save");
 		JMenuItem exit = new JMenuItem("Exit");
-		JMenuItem comingSoon = new JMenuItem("Coming soon!");
+		JMenuItem comingSoon = new JMenuItem("Refresh");
 		
 		menu.add(create);
 		menu.add(open);

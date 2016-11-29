@@ -18,7 +18,10 @@ public class DeleteFolio implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		model.deleteFolio(frame.getCurrentTab().getName());
+		String folioName = frame.getCurrentTab().getName();
+		frame.closeTab();
+		frame.setFolioName("");
+		model.deleteFolio(folioName);
 	}
 
 }
