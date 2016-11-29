@@ -1,12 +1,14 @@
 package api;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
-public class Folio implements IFolio{
+@SuppressWarnings("serial")
+public class Folio implements IFolio, Serializable{
 	Map<String,IShare> shares;
 	
 	public Folio(){
@@ -50,9 +52,16 @@ public class Folio implements IFolio{
 			shares.get(tickerSymbol).incrementShares(numShares);
 			return;
 		}
-			
+		
+		
+		/* check if ticker symbol is valid */
+		
 		IShare tempShare = new Share(tickerSymbol, shareName, numShares); 
-		shares.put(tickerSymbol, tempShare);
+		if(tempShare.getPricePerShare() != 0)
+			shares.put(tickerSymbol, tempShare);
+		else
+			System.out.println("Invalid Ticker Name");
+		
 	}
 	
 	/**

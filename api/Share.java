@@ -1,12 +1,14 @@
 package api;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import exceptions.MethodException;
 import exceptions.NoSuchTickerException;
 import exceptions.WebsiteDataException;
 
-public class Share implements IShare {
+@SuppressWarnings("serial")
+public class Share implements IShare, Serializable {
 
 	private String tickerSymbol;
 	private String shareName;
@@ -66,7 +68,8 @@ public class Share implements IShare {
 	private void updatePricePerShare() {
 		try {
 			quote.setValues(tickerSymbol);
-			pricePerShare= quote.getLatest();
+			
+			pricePerShare = (quote.getLatest() != null) ? quote.getLatest() : 0;
 		} catch (IOException | WebsiteDataException | NoSuchTickerException | MethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

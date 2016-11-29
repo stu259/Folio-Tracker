@@ -17,6 +17,7 @@ public interface IModel {
 	
 	public void deleteFolio(String name);
 	
+	public void refresh(String name);
 
 	public void buyShares(String folioName, String tSymbol, int nShares);
 	

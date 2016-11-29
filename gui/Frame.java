@@ -84,7 +84,7 @@ public class Frame extends JFrame implements Observer, IFrame{
 		JMenuItem create = folio.getItem(0); 
 		//JMenuItem open = folio.getItem(1);
 		JMenuItem save= folio.getItem(2);
-		//JMenuItem comingSoon = ((JMenu) folio.getItem(4)).getItem(0); 
+		JMenuItem refresh = ((JMenu) folio.getItem(4)).getItem(0); 
 		JMenuItem exit = folio.getItem(5);
 		
 		
@@ -93,6 +93,8 @@ public class Frame extends JFrame implements Observer, IFrame{
 		
 		create.addActionListener(new NewFolio(this,model));
 		save.addActionListener(new Save(this, model));
+		
+		refresh.addActionListener(new Refresh(this, model));
 		exit.addActionListener(new ExitFrame(this));	
 		
 		
@@ -154,8 +156,12 @@ public class Frame extends JFrame implements Observer, IFrame{
 
 	
 	public int getNShares() {
-		
-		return (getCurrentTab().getHeader().getNumShares() == "") ? 0 : Integer.parseInt(getCurrentTab().getHeader().getNumShares());
+		try{
+			return Integer.parseInt(getCurrentTab().getHeader().getNumShares());
+		}catch(NumberFormatException e){
+			System.out.println("Catched the exception so gonna return 0 and do nothing");
+			return 0;
+		}
 	}
 
 

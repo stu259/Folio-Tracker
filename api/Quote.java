@@ -31,7 +31,8 @@ import exceptions.MethodException;
 import exceptions.NoSuchTickerException;
 import exceptions.WebsiteDataException;
 
-public class Quote implements IQuote {
+@SuppressWarnings("serial")
+public class Quote implements IQuote, Serializable {
 
 	/**
 	 * Quote is a utility class that allows calling code to retrieve the latest
@@ -151,7 +152,10 @@ public class Quote implements IQuote {
 	 * 
 	 */
 	public Double getLatest() throws MethodException {
-		return ensureNotNull(_shareDataList.get(1)) ? Double.valueOf(_shareDataList.get(1)):null;
+		if(!_shareDataList.get(1).equals("N/A")){
+			return ensureNotNull(_shareDataList.get(1)) ? Double.valueOf(_shareDataList.get(1)):null;
+		}
+		return null;
 	}// end of getLatest
 
 	/**

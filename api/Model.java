@@ -1,17 +1,26 @@
 package api;
 
 import static javax.swing.JOptionPane.showMessageDialog;
+
+import java.io.Serializable;
 import java.util.*;
 import javax.swing.JOptionPane;
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
-public class Model extends java.util.Observable implements IModel{
+@SuppressWarnings("serial")
+public class Model extends java.util.Observable implements IModel, Serializable{
 	private Map<String,IFolio> folios;
 	
 	public Model(){
 		folios = new HashMap<String,IFolio>();
 		
+	}
+	
+	@Override
+	public void refresh(String name){
+		if(folios.get(name).getShares().length > 0)
+			update();
 	}
 	
 	/**
@@ -30,7 +39,7 @@ public class Model extends java.util.Observable implements IModel{
 	@Override
 	public void deleteFolio(String name){
 		folios.remove(name);
-		update();
+		//update();
 	}
 	
 	/**
