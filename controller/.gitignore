@@ -6,3 +6,7 @@
 /Save.class
 /SellShares.class
 /BuyShares.class
+/CloseFolio.class
+/DeleteFolio.class
+/EditShare.class
+/NewFolio.class

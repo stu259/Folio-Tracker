@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Dimension;
+import java.text.DecimalFormat;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -83,15 +85,15 @@ public class Table extends JPanel implements ITable{
 			System.out.println(s.getTickerSymbol() + "share.tickersymbol after update");
 		}
 		
-		
+		DecimalFormat Currency = new DecimalFormat("#0.00");
 		for(IShare s : f.getShares()){
 			
 			Object[] row = new Object[5];
 			row[0] = (String) s.getTickerSymbol();
 			row[1] = (String) s.getShareName();
 			row[2] = (int) s.getNumShares();
-			row[3] = (double) s.getPricePerShare();
-			row[4] = (double) s.getValueHolding();
+			row[3] = Currency.format((double) s.getPricePerShare());
+			row[4] = Currency.format((double) s.getValueHolding());
 			
 			System.out.println(row[0] + "Row[0] ");
 			

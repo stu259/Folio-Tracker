@@ -1,12 +1,14 @@
 package api;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import exceptions.InvalidNumberOfSharesException;
 import exceptions.InvalidStockException;
 
-public class Folio implements IFolio{
+@SuppressWarnings("serial")
+public class Folio implements IFolio, Serializable{
 	Map<String,IShare> shares;
 	
 	public Folio(){

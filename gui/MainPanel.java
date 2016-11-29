@@ -1,5 +1,6 @@
 package gui;
 import java.awt.*;
+import java.text.*;
 
 import javax.swing.*;
 
@@ -38,7 +39,11 @@ public class MainPanel extends JPanel{
 		for(int i = 0; i < nShares ; ++i){
 			val += s[i].getValueHolding();
 		}
-		folioTotal.setText("Total value for '" + tabname + "' is " + val + ".");
+		
+		//format to currency
+		DecimalFormat Currency = new DecimalFormat("#0.00");
+		String amount = Currency.format(val);
+		folioTotal.setText("Total value of '" + tabname + "' is: £" + amount);
 	}
 	
 	
