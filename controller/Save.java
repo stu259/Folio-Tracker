@@ -33,12 +33,12 @@ public class Save implements ActionListener{
 			IFolio currFolio = model.getFolio(tabArr.get(i));
 			
 			
-				FileOutputStream fileOut = new FileOutputStream(tabArr.get(i) + ".sur" );
+				FileOutputStream fileOut = new FileOutputStream("folios/" + tabArr.get(i) + ".sur" );
 				ObjectOutputStream out = new ObjectOutputStream(fileOut);
 				out.writeObject((Folio)currFolio);
 				out.close();
 				fileOut.close();
-				System.out.println("Saved as " + tabArr.get(i));
+				System.out.println("Saved as testing");
 			}
 			catch(IOException exception){
 				exception.printStackTrace();
@@ -49,5 +49,6 @@ public class Save implements ActionListener{
 		}
 	}
 	
+
 
 
